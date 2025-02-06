@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from ari_sync_sdk.models.stasis_start import StasisStart
+from ari_async_sdk.models.stasis_start import StasisStart
 
 # TODO update the JSON string below
 json = "{}"

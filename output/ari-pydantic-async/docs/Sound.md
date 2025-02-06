@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from ari_sync_sdk.models.sound import Sound
+from ari_async_sdk.models.sound import Sound
 
 # TODO update the JSON string below
 json = "{}"

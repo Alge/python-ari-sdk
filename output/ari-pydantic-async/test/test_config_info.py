@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from ari_sync_sdk.models.config_info import ConfigInfo  # noqa: E501
+from ari_async_sdk.models.config_info import ConfigInfo  # noqa: E501
 
 class TestConfigInfo(unittest.TestCase):
     """ConfigInfo unit test stubs"""
@@ -41,7 +41,7 @@ class TestConfigInfo(unittest.TestCase):
                 max_load = 1.337,
                 max_open_files = 56,
                 name = '',
-                setid = ari_sync_sdk.models.set_id.SetId(
+                setid = ari_async_sdk.models.set_id.SetId(
                     group = '', 
                     user = '', )
             )
@@ -49,7 +49,7 @@ class TestConfigInfo(unittest.TestCase):
             return ConfigInfo(
                 default_language = '',
                 name = '',
-                setid = ari_sync_sdk.models.set_id.SetId(
+                setid = ari_async_sdk.models.set_id.SetId(
                     group = '', 
                     user = '', ),
         )

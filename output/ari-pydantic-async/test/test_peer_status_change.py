@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from ari_sync_sdk.models.peer_status_change import PeerStatusChange  # noqa: E501
+from ari_async_sdk.models.peer_status_change import PeerStatusChange  # noqa: E501
 
 class TestPeerStatusChange(unittest.TestCase):
     """PeerStatusChange unit test stubs"""
@@ -36,14 +36,14 @@ class TestPeerStatusChange(unittest.TestCase):
         model = PeerStatusChange()  # noqa: E501
         if include_optional:
             return PeerStatusChange(
-                endpoint = ari_sync_sdk.models.endpoint.Endpoint(
+                endpoint = ari_async_sdk.models.endpoint.Endpoint(
                     channel_ids = [
                         ''
                         ], 
                     resource = '', 
                     state = '', 
                     technology = '', ),
-                peer = ari_sync_sdk.models.peer.Peer(
+                peer = ari_async_sdk.models.peer.Peer(
                     address = '', 
                     cause = '', 
                     peer_status = '', 
@@ -52,14 +52,14 @@ class TestPeerStatusChange(unittest.TestCase):
             )
         else:
             return PeerStatusChange(
-                endpoint = ari_sync_sdk.models.endpoint.Endpoint(
+                endpoint = ari_async_sdk.models.endpoint.Endpoint(
                     channel_ids = [
                         ''
                         ], 
                     resource = '', 
                     state = '', 
                     technology = '', ),
-                peer = ari_sync_sdk.models.peer.Peer(
+                peer = ari_async_sdk.models.peer.Peer(
                     address = '', 
                     cause = '', 
                     peer_status = '', 

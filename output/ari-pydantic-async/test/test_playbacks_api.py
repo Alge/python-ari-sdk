@@ -14,7 +14,7 @@
 
 import unittest
 
-from ari_sync_sdk.api.playbacks_api import PlaybacksApi  # noqa: E501
+from ari_async_sdk.api.playbacks_api import PlaybacksApi  # noqa: E501
 
 
 class TestPlaybacksApi(unittest.IsolatedAsyncioTestCase):

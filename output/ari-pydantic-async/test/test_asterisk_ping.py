@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from ari_sync_sdk.models.asterisk_ping import AsteriskPing  # noqa: E501
+from ari_async_sdk.models.asterisk_ping import AsteriskPing  # noqa: E501
 
 class TestAsteriskPing(unittest.TestCase):
     """AsteriskPing unit test stubs"""

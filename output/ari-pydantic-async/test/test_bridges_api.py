@@ -14,7 +14,7 @@
 
 import unittest
 
-from ari_sync_sdk.api.bridges_api import BridgesApi  # noqa: E501
+from ari_async_sdk.api.bridges_api import BridgesApi  # noqa: E501
 
 
 class TestBridgesApi(unittest.IsolatedAsyncioTestCase):

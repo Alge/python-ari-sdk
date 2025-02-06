@@ -1,4 +1,4 @@
-# ari_sync_sdk.ChannelsApi
+# ari_async_sdk.ChannelsApi
 
 All URIs are relative to *http://localhost:8088/ari*
 
@@ -49,21 +49,21 @@ Using media operations such as /play on a channel playing MOH in this manner wil
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.ChannelsApi(api_client)
+    api_instance = ari_async_sdk.ChannelsApi(api_client)
     channel_id = 'channel_id_example' # str | Channel's id
     moh_class = 'moh_class_example' # str | Music on hold class to use (optional)
 
@@ -113,21 +113,21 @@ Answer a channel.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.ChannelsApi(api_client)
+    api_instance = ari_async_sdk.ChannelsApi(api_client)
     channel_id = 'channel_id_example' # str | Channel's id
 
     try:
@@ -175,21 +175,21 @@ Exit application; continue execution in the dialplan.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.ChannelsApi(api_client)
+    api_instance = ari_async_sdk.ChannelsApi(api_client)
     channel_id = 'channel_id_example' # str | Channel's id
     context = 'context_example' # str | The context to continue to. (optional)
     extension = 'extension_example' # str | The extension to continue to. (optional)
@@ -245,22 +245,22 @@ Create channel.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.models.channel import Channel
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.models.channel import Channel
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.ChannelsApi(api_client)
+    api_instance = ari_async_sdk.ChannelsApi(api_client)
     endpoint = 'endpoint_example' # str | Endpoint for channel communication
     app = 'app_example' # str | Stasis Application to place channel into
     app_args = 'app_args_example' # str | The application arguments to pass to the Stasis application provided by 'app'. Mutually exclusive with 'context', 'extension', 'priority', and 'label'. (optional)
@@ -324,21 +324,21 @@ Stop playing music on hold to a channel.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.ChannelsApi(api_client)
+    api_instance = ari_async_sdk.ChannelsApi(api_client)
     channel_id = 'channel_id_example' # str | Channel's id
 
     try:
@@ -386,21 +386,21 @@ Dial a created channel.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.ChannelsApi(api_client)
+    api_instance = ari_async_sdk.ChannelsApi(api_client)
     channel_id = 'channel_id_example' # str | Channel's id
     caller = 'caller_example' # str | Channel ID of caller (optional)
     timeout = 0 # int | Dial timeout (optional) (default to 0)
@@ -454,22 +454,22 @@ Create a channel to an External Media source/sink.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.models.channel import Channel
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.models.channel import Channel
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.ChannelsApi(api_client)
+    api_instance = ari_async_sdk.ChannelsApi(api_client)
     app = 'app_example' # str | Stasis Application to place channel into
     external_host = 'external_host_example' # str | Hostname/ip:port of external host
     format = 'format_example' # str | Format to encode audio in
@@ -537,22 +537,22 @@ Get the value of a channel variable or function.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.models.variable import Variable
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.models.variable import Variable
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.ChannelsApi(api_client)
+    api_instance = ari_async_sdk.ChannelsApi(api_client)
     channel_id = 'channel_id_example' # str | Channel's id
     variable = 'variable_example' # str | The channel variable or function to get
 
@@ -604,22 +604,22 @@ Channel details.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.models.channel import Channel
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.models.channel import Channel
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.ChannelsApi(api_client)
+    api_instance = ari_async_sdk.ChannelsApi(api_client)
     channel_id = 'channel_id_example' # str | Channel's id
 
     try:
@@ -669,21 +669,21 @@ Delete (i.e. hangup) a channel.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.ChannelsApi(api_client)
+    api_instance = ari_async_sdk.ChannelsApi(api_client)
     channel_id = 'channel_id_example' # str | Channel's id
     reason_code = 'reason_code_example' # str | The reason code for hanging up the channel for detail use. Mutually exclusive with 'reason'. See detail hangup codes at here. https://wiki.asterisk.org/wiki/display/AST/Hangup+Cause+Mappings (optional)
     reason = 'reason_example' # str | Reason for hanging up the channel for simple use. Mutually exclusive with 'reason_code'. (optional)
@@ -735,21 +735,21 @@ Hold a channel.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.ChannelsApi(api_client)
+    api_instance = ari_async_sdk.ChannelsApi(api_client)
     channel_id = 'channel_id_example' # str | Channel's id
 
     try:
@@ -797,22 +797,22 @@ List all active channels in Asterisk.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.models.channel import Channel
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.models.channel import Channel
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.ChannelsApi(api_client)
+    api_instance = ari_async_sdk.ChannelsApi(api_client)
 
     try:
         # List all active channels in Asterisk.
@@ -858,21 +858,21 @@ Move the channel from one Stasis application to another.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.ChannelsApi(api_client)
+    api_instance = ari_async_sdk.ChannelsApi(api_client)
     channel_id = 'channel_id_example' # str | Channel's id
     app = 'app_example' # str | The channel will be passed to this Stasis application.
     app_args = 'app_args_example' # str | The application arguments to pass to the Stasis application provided by 'app'. (optional)
@@ -924,21 +924,21 @@ Mute a channel.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.ChannelsApi(api_client)
+    api_instance = ari_async_sdk.ChannelsApi(api_client)
     channel_id = 'channel_id_example' # str | Channel's id
     direction = 'both' # str | Direction in which to mute audio (optional) (default to 'both')
 
@@ -990,22 +990,22 @@ The new channel is created immediately and a snapshot of it returned. If a Stasi
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.models.channel import Channel
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.models.channel import Channel
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.ChannelsApi(api_client)
+    api_instance = ari_async_sdk.ChannelsApi(api_client)
     endpoint = 'endpoint_example' # str | Endpoint to call.
     extension = 'extension_example' # str | The extension to dial after the endpoint answers. Mutually exclusive with 'app'. (optional)
     context = 'context_example' # str | The context to dial after the endpoint answers. If omitted, uses 'default'. Mutually exclusive with 'app'. (optional)
@@ -1083,22 +1083,22 @@ The new channel is created immediately and a snapshot of it returned. If a Stasi
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.models.channel import Channel
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.models.channel import Channel
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.ChannelsApi(api_client)
+    api_instance = ari_async_sdk.ChannelsApi(api_client)
     channel_id = 'channel_id_example' # str | The unique id to assign the channel on creation.
     endpoint = 'endpoint_example' # str | Endpoint to call.
     extension = 'extension_example' # str | The extension to dial after the endpoint answers. Mutually exclusive with 'app'. (optional)
@@ -1176,22 +1176,22 @@ The media URI may be any of a number of URI's. Currently sound:, recording:, num
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.models.playback import Playback
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.models.playback import Playback
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.ChannelsApi(api_client)
+    api_instance = ari_async_sdk.ChannelsApi(api_client)
     channel_id = 'channel_id_example' # str | Channel's id
     playback_id = 'playback_id_example' # str | Playback ID.
     media = ['media_example'] # List[str] | Media URIs to play.
@@ -1253,22 +1253,22 @@ The media URI may be any of a number of URI's. Currently sound:, recording:, num
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.models.playback import Playback
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.models.playback import Playback
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.ChannelsApi(api_client)
+    api_instance = ari_async_sdk.ChannelsApi(api_client)
     channel_id = 'channel_id_example' # str | Channel's id
     media = ['media_example'] # List[str] | Media URIs to play.
     lang = 'lang_example' # str | For sounds, selects language for sound. (optional)
@@ -1330,22 +1330,22 @@ Record audio from a channel. Note that this will not capture audio sent to the c
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.models.live_recording import LiveRecording
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.models.live_recording import LiveRecording
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.ChannelsApi(api_client)
+    api_instance = ari_async_sdk.ChannelsApi(api_client)
     channel_id = 'channel_id_example' # str | Channel's id
     name = 'name_example' # str | Recording's filename
     format = 'format_example' # str | Format to encode audio in
@@ -1409,21 +1409,21 @@ Redirect the channel to a different location.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.ChannelsApi(api_client)
+    api_instance = ari_async_sdk.ChannelsApi(api_client)
     channel_id = 'channel_id_example' # str | Channel's id
     endpoint = 'endpoint_example' # str | The endpoint to redirect the channel to
 
@@ -1473,21 +1473,21 @@ Indicate ringing to a channel.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.ChannelsApi(api_client)
+    api_instance = ari_async_sdk.ChannelsApi(api_client)
     channel_id = 'channel_id_example' # str | Channel's id
 
     try:
@@ -1535,21 +1535,21 @@ Stop ringing indication on a channel if locally generated.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.ChannelsApi(api_client)
+    api_instance = ari_async_sdk.ChannelsApi(api_client)
     channel_id = 'channel_id_example' # str | Channel's id
 
     try:
@@ -1597,22 +1597,22 @@ RTP stats on a channel.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.models.rt_pstat import RTPstat
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.models.rt_pstat import RTPstat
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.ChannelsApi(api_client)
+    api_instance = ari_async_sdk.ChannelsApi(api_client)
     channel_id = 'channel_id_example' # str | Channel's id
 
     try:
@@ -1662,21 +1662,21 @@ Send provided DTMF to a given channel.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.ChannelsApi(api_client)
+    api_instance = ari_async_sdk.ChannelsApi(api_client)
     channel_id = 'channel_id_example' # str | Channel's id
     dtmf = 'dtmf_example' # str | DTMF To send. (optional)
     before = 0 # int | Amount of time to wait before DTMF digits (specified in milliseconds) start. (optional) (default to 0)
@@ -1734,21 +1734,21 @@ Set the value of a channel variable or function.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.ChannelsApi(api_client)
+    api_instance = ari_async_sdk.ChannelsApi(api_client)
     channel_id = 'channel_id_example' # str | Channel's id
     variable = 'variable_example' # str | The channel variable or function to set
     value = 'value_example' # str | The value to set the variable to (optional)
@@ -1802,22 +1802,22 @@ Snoop (spy/whisper) on a specific channel.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.models.channel import Channel
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.models.channel import Channel
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.ChannelsApi(api_client)
+    api_instance = ari_async_sdk.ChannelsApi(api_client)
     channel_id = 'channel_id_example' # str | Channel's id
     app = 'app_example' # str | Application the snooping channel is placed into
     spy = 'none' # str | Direction of audio to spy on (optional) (default to 'none')
@@ -1879,22 +1879,22 @@ Snoop (spy/whisper) on a specific channel.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.models.channel import Channel
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.models.channel import Channel
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.ChannelsApi(api_client)
+    api_instance = ari_async_sdk.ChannelsApi(api_client)
     channel_id = 'channel_id_example' # str | Channel's id
     snoop_id = 'snoop_id_example' # str | Unique ID to assign to snooping channel
     app = 'app_example' # str | Application the snooping channel is placed into
@@ -1956,21 +1956,21 @@ Using media operations such as /play on a channel playing silence in this manner
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.ChannelsApi(api_client)
+    api_instance = ari_async_sdk.ChannelsApi(api_client)
     channel_id = 'channel_id_example' # str | Channel's id
 
     try:
@@ -2018,21 +2018,21 @@ Stop playing silence to a channel.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.ChannelsApi(api_client)
+    api_instance = ari_async_sdk.ChannelsApi(api_client)
     channel_id = 'channel_id_example' # str | Channel's id
 
     try:
@@ -2080,21 +2080,21 @@ Remove a channel from hold.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.ChannelsApi(api_client)
+    api_instance = ari_async_sdk.ChannelsApi(api_client)
     channel_id = 'channel_id_example' # str | Channel's id
 
     try:
@@ -2142,21 +2142,21 @@ Unmute a channel.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.ChannelsApi(api_client)
+    api_instance = ari_async_sdk.ChannelsApi(api_client)
     channel_id = 'channel_id_example' # str | Channel's id
     direction = 'both' # str | Direction in which to unmute audio (optional) (default to 'both')
 

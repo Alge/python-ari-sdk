@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from ari_sync_sdk.models.dialplan_cep import DialplanCEP  # noqa: E501
+from ari_async_sdk.models.dialplan_cep import DialplanCEP  # noqa: E501
 
 class TestDialplanCEP(unittest.TestCase):
     """DialplanCEP unit test stubs"""

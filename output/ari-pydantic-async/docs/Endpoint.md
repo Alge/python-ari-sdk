@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from ari_sync_sdk.models.endpoint import Endpoint
+from ari_async_sdk.models.endpoint import Endpoint
 
 # TODO update the JSON string below
 json = "{}"

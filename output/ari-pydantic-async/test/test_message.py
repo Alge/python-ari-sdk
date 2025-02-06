@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from ari_sync_sdk.models.message import Message  # noqa: E501
+from ari_async_sdk.models.message import Message  # noqa: E501
 
 class TestMessage(unittest.TestCase):
     """Message unit test stubs"""

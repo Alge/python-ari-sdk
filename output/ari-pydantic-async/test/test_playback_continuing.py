@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from ari_sync_sdk.models.playback_continuing import PlaybackContinuing  # noqa: E501
+from ari_async_sdk.models.playback_continuing import PlaybackContinuing  # noqa: E501
 
 class TestPlaybackContinuing(unittest.TestCase):
     """PlaybackContinuing unit test stubs"""
@@ -36,7 +36,7 @@ class TestPlaybackContinuing(unittest.TestCase):
         model = PlaybackContinuing()  # noqa: E501
         if include_optional:
             return PlaybackContinuing(
-                playback = ari_sync_sdk.models.playback.Playback(
+                playback = ari_async_sdk.models.playback.Playback(
                     id = '', 
                     language = '', 
                     media_uri = '', 
@@ -46,7 +46,7 @@ class TestPlaybackContinuing(unittest.TestCase):
             )
         else:
             return PlaybackContinuing(
-                playback = ari_sync_sdk.models.playback.Playback(
+                playback = ari_async_sdk.models.playback.Playback(
                     id = '', 
                     language = '', 
                     media_uri = '', 

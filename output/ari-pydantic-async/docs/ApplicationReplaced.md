@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from ari_sync_sdk.models.application_replaced import ApplicationReplaced
+from ari_async_sdk.models.application_replaced import ApplicationReplaced
 
 # TODO update the JSON string below
 json = "{}"

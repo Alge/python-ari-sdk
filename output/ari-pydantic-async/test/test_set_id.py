@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from ari_sync_sdk.models.set_id import SetId  # noqa: E501
+from ari_async_sdk.models.set_id import SetId  # noqa: E501
 
 class TestSetId(unittest.TestCase):
     """SetId unit test stubs"""

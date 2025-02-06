@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from ari_sync_sdk.models.text_message_received import TextMessageReceived  # noqa: E501
+from ari_async_sdk.models.text_message_received import TextMessageReceived  # noqa: E501
 
 class TestTextMessageReceived(unittest.TestCase):
     """TextMessageReceived unit test stubs"""
@@ -36,26 +36,26 @@ class TestTextMessageReceived(unittest.TestCase):
         model = TextMessageReceived()  # noqa: E501
         if include_optional:
             return TextMessageReceived(
-                endpoint = ari_sync_sdk.models.endpoint.Endpoint(
+                endpoint = ari_async_sdk.models.endpoint.Endpoint(
                     channel_ids = [
                         ''
                         ], 
                     resource = '', 
                     state = '', 
                     technology = '', ),
-                message = ari_sync_sdk.models.text_message.TextMessage(
+                message = ari_async_sdk.models.text_message.TextMessage(
                     body = '', 
                     from = '', 
                     to = '', 
-                    variables = ari_sync_sdk.models.variables.variables(), )
+                    variables = ari_async_sdk.models.variables.variables(), )
             )
         else:
             return TextMessageReceived(
-                message = ari_sync_sdk.models.text_message.TextMessage(
+                message = ari_async_sdk.models.text_message.TextMessage(
                     body = '', 
                     from = '', 
                     to = '', 
-                    variables = ari_sync_sdk.models.variables.variables(), ),
+                    variables = ari_async_sdk.models.variables.variables(), ),
         )
         """
 

@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from ari_sync_sdk.models.endpoint_state_change import EndpointStateChange  # noqa: E501
+from ari_async_sdk.models.endpoint_state_change import EndpointStateChange  # noqa: E501
 
 class TestEndpointStateChange(unittest.TestCase):
     """EndpointStateChange unit test stubs"""
@@ -36,7 +36,7 @@ class TestEndpointStateChange(unittest.TestCase):
         model = EndpointStateChange()  # noqa: E501
         if include_optional:
             return EndpointStateChange(
-                endpoint = ari_sync_sdk.models.endpoint.Endpoint(
+                endpoint = ari_async_sdk.models.endpoint.Endpoint(
                     channel_ids = [
                         ''
                         ], 
@@ -46,7 +46,7 @@ class TestEndpointStateChange(unittest.TestCase):
             )
         else:
             return EndpointStateChange(
-                endpoint = ari_sync_sdk.models.endpoint.Endpoint(
+                endpoint = ari_async_sdk.models.endpoint.Endpoint(
                     channel_ids = [
                         ''
                         ], 

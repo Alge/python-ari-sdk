@@ -24,7 +24,7 @@ pip install git+https://github.com/GIT_USER_ID/GIT_REPO_ID.git
 
 Then import the package:
 ```python
-import ari_sync_sdk
+import ari_async_sdk
 ```
 
 ### Setuptools
@@ -38,7 +38,7 @@ python setup.py install --user
 
 Then import the package:
 ```python
-import ari_sync_sdk
+import ari_async_sdk
 ```
 
 ### Tests
@@ -52,22 +52,22 @@ Please follow the [installation procedure](#installation--usage) and then run th
 ```python
 
 import time
-import ari_sync_sdk
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.ApplicationsApi(api_client)
+    api_instance = ari_async_sdk.ApplicationsApi(api_client)
     application_name = 'application_name_example' # str | Application's name
     filter = None # object | Specify which event types to allow/disallow (optional)
 

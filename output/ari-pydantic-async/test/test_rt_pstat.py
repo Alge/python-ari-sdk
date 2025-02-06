@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from ari_sync_sdk.models.rt_pstat import RTPstat  # noqa: E501
+from ari_async_sdk.models.rt_pstat import RTPstat  # noqa: E501
 
 class TestRTPstat(unittest.TestCase):
     """RTPstat unit test stubs"""

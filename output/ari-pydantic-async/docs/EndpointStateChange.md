@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from ari_sync_sdk.models.endpoint_state_change import EndpointStateChange
+from ari_async_sdk.models.endpoint_state_change import EndpointStateChange
 
 # TODO update the JSON string below
 json = "{}"

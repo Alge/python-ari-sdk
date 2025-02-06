@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from ari_sync_sdk.models.dial import Dial  # noqa: E501
+from ari_async_sdk.models.dial import Dial  # noqa: E501
 
 class TestDial(unittest.TestCase):
     """Dial unit test stubs"""
@@ -36,17 +36,17 @@ class TestDial(unittest.TestCase):
         model = Dial()  # noqa: E501
         if include_optional:
             return Dial(
-                caller = ari_sync_sdk.models.channel.Channel(
+                caller = ari_async_sdk.models.channel.Channel(
                     accountcode = '', 
-                    caller = ari_sync_sdk.models.caller_id.CallerID(
+                    caller = ari_async_sdk.models.caller_id.CallerID(
                         name = '', 
                         number = '', ), 
-                    channelvars = ari_sync_sdk.models.channelvars.channelvars(), 
-                    connected = ari_sync_sdk.models.caller_id.CallerID(
+                    channelvars = ari_async_sdk.models.channelvars.channelvars(), 
+                    connected = ari_async_sdk.models.caller_id.CallerID(
                         name = '', 
                         number = '', ), 
                     creationtime = datetime.datetime.strptime('1975-12-30', '%Y-%m-%d').date(), 
-                    dialplan = ari_sync_sdk.models.dialplan_cep.DialplanCEP(
+                    dialplan = ari_async_sdk.models.dialplan_cep.DialplanCEP(
                         app_data = '', 
                         app_name = '', 
                         context = '', 
@@ -59,17 +59,17 @@ class TestDial(unittest.TestCase):
                 dialstatus = '',
                 dialstring = '',
                 forward = '',
-                forwarded = ari_sync_sdk.models.channel.Channel(
+                forwarded = ari_async_sdk.models.channel.Channel(
                     accountcode = '', 
-                    caller = ari_sync_sdk.models.caller_id.CallerID(
+                    caller = ari_async_sdk.models.caller_id.CallerID(
                         name = '', 
                         number = '', ), 
-                    channelvars = ari_sync_sdk.models.channelvars.channelvars(), 
-                    connected = ari_sync_sdk.models.caller_id.CallerID(
+                    channelvars = ari_async_sdk.models.channelvars.channelvars(), 
+                    connected = ari_async_sdk.models.caller_id.CallerID(
                         name = '', 
                         number = '', ), 
                     creationtime = datetime.datetime.strptime('1975-12-30', '%Y-%m-%d').date(), 
-                    dialplan = ari_sync_sdk.models.dialplan_cep.DialplanCEP(
+                    dialplan = ari_async_sdk.models.dialplan_cep.DialplanCEP(
                         app_data = '', 
                         app_name = '', 
                         context = '', 
@@ -79,17 +79,17 @@ class TestDial(unittest.TestCase):
                     language = '', 
                     name = '', 
                     state = '', ),
-                peer = ari_sync_sdk.models.channel.Channel(
+                peer = ari_async_sdk.models.channel.Channel(
                     accountcode = '', 
-                    caller = ari_sync_sdk.models.caller_id.CallerID(
+                    caller = ari_async_sdk.models.caller_id.CallerID(
                         name = '', 
                         number = '', ), 
-                    channelvars = ari_sync_sdk.models.channelvars.channelvars(), 
-                    connected = ari_sync_sdk.models.caller_id.CallerID(
+                    channelvars = ari_async_sdk.models.channelvars.channelvars(), 
+                    connected = ari_async_sdk.models.caller_id.CallerID(
                         name = '', 
                         number = '', ), 
                     creationtime = datetime.datetime.strptime('1975-12-30', '%Y-%m-%d').date(), 
-                    dialplan = ari_sync_sdk.models.dialplan_cep.DialplanCEP(
+                    dialplan = ari_async_sdk.models.dialplan_cep.DialplanCEP(
                         app_data = '', 
                         app_name = '', 
                         context = '', 
@@ -103,17 +103,17 @@ class TestDial(unittest.TestCase):
         else:
             return Dial(
                 dialstatus = '',
-                peer = ari_sync_sdk.models.channel.Channel(
+                peer = ari_async_sdk.models.channel.Channel(
                     accountcode = '', 
-                    caller = ari_sync_sdk.models.caller_id.CallerID(
+                    caller = ari_async_sdk.models.caller_id.CallerID(
                         name = '', 
                         number = '', ), 
-                    channelvars = ari_sync_sdk.models.channelvars.channelvars(), 
-                    connected = ari_sync_sdk.models.caller_id.CallerID(
+                    channelvars = ari_async_sdk.models.channelvars.channelvars(), 
+                    connected = ari_async_sdk.models.caller_id.CallerID(
                         name = '', 
                         number = '', ), 
                     creationtime = datetime.datetime.strptime('1975-12-30', '%Y-%m-%d').date(), 
-                    dialplan = ari_sync_sdk.models.dialplan_cep.DialplanCEP(
+                    dialplan = ari_async_sdk.models.dialplan_cep.DialplanCEP(
                         app_data = '', 
                         app_name = '', 
                         context = '', 

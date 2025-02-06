@@ -1,4 +1,4 @@
-# ari_sync_sdk.MailboxesApi
+# ari_async_sdk.MailboxesApi
 
 All URIs are relative to *http://localhost:8088/ari*
 
@@ -20,21 +20,21 @@ Destroy a mailbox.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.MailboxesApi(api_client)
+    api_instance = ari_async_sdk.MailboxesApi(api_client)
     mailbox_name = 'mailbox_name_example' # str | Name of the mailbox
 
     try:
@@ -82,22 +82,22 @@ Retrieve the current state of a mailbox.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.models.mailbox import Mailbox
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.models.mailbox import Mailbox
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.MailboxesApi(api_client)
+    api_instance = ari_async_sdk.MailboxesApi(api_client)
     mailbox_name = 'mailbox_name_example' # str | Name of the mailbox
 
     try:
@@ -147,22 +147,22 @@ List all mailboxes.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.models.mailbox import Mailbox
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.models.mailbox import Mailbox
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.MailboxesApi(api_client)
+    api_instance = ari_async_sdk.MailboxesApi(api_client)
 
     try:
         # List all mailboxes.
@@ -208,21 +208,21 @@ Change the state of a mailbox. (Note - implicitly creates the mailbox).
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.MailboxesApi(api_client)
+    api_instance = ari_async_sdk.MailboxesApi(api_client)
     mailbox_name = 'mailbox_name_example' # str | Name of the mailbox
     old_messages = 56 # int | Count of old messages in the mailbox
     new_messages = 56 # int | Count of new messages in the mailbox

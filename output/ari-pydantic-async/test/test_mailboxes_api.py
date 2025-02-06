@@ -14,7 +14,7 @@
 
 import unittest
 
-from ari_sync_sdk.api.mailboxes_api import MailboxesApi  # noqa: E501
+from ari_async_sdk.api.mailboxes_api import MailboxesApi  # noqa: E501
 
 
 class TestMailboxesApi(unittest.IsolatedAsyncioTestCase):

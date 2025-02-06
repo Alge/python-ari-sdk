@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from ari_sync_sdk.models.bridge_blind_transfer import BridgeBlindTransfer  # noqa: E501
+from ari_async_sdk.models.bridge_blind_transfer import BridgeBlindTransfer  # noqa: E501
 
 class TestBridgeBlindTransfer(unittest.TestCase):
     """BridgeBlindTransfer unit test stubs"""
@@ -36,7 +36,7 @@ class TestBridgeBlindTransfer(unittest.TestCase):
         model = BridgeBlindTransfer()  # noqa: E501
         if include_optional:
             return BridgeBlindTransfer(
-                bridge = ari_sync_sdk.models.bridge.Bridge(
+                bridge = ari_async_sdk.models.bridge.Bridge(
                     bridge_class = '', 
                     bridge_type = '', 
                     channels = [
@@ -49,17 +49,17 @@ class TestBridgeBlindTransfer(unittest.TestCase):
                     technology = '', 
                     video_mode = '', 
                     video_source_id = '', ),
-                channel = ari_sync_sdk.models.channel.Channel(
+                channel = ari_async_sdk.models.channel.Channel(
                     accountcode = '', 
-                    caller = ari_sync_sdk.models.caller_id.CallerID(
+                    caller = ari_async_sdk.models.caller_id.CallerID(
                         name = '', 
                         number = '', ), 
-                    channelvars = ari_sync_sdk.models.channelvars.channelvars(), 
-                    connected = ari_sync_sdk.models.caller_id.CallerID(
+                    channelvars = ari_async_sdk.models.channelvars.channelvars(), 
+                    connected = ari_async_sdk.models.caller_id.CallerID(
                         name = '', 
                         number = '', ), 
                     creationtime = datetime.datetime.strptime('1975-12-30', '%Y-%m-%d').date(), 
-                    dialplan = ari_sync_sdk.models.dialplan_cep.DialplanCEP(
+                    dialplan = ari_async_sdk.models.dialplan_cep.DialplanCEP(
                         app_data = '', 
                         app_name = '', 
                         context = '', 
@@ -72,17 +72,17 @@ class TestBridgeBlindTransfer(unittest.TestCase):
                 context = '',
                 exten = '',
                 is_external = True,
-                replace_channel = ari_sync_sdk.models.channel.Channel(
+                replace_channel = ari_async_sdk.models.channel.Channel(
                     accountcode = '', 
-                    caller = ari_sync_sdk.models.caller_id.CallerID(
+                    caller = ari_async_sdk.models.caller_id.CallerID(
                         name = '', 
                         number = '', ), 
-                    channelvars = ari_sync_sdk.models.channelvars.channelvars(), 
-                    connected = ari_sync_sdk.models.caller_id.CallerID(
+                    channelvars = ari_async_sdk.models.channelvars.channelvars(), 
+                    connected = ari_async_sdk.models.caller_id.CallerID(
                         name = '', 
                         number = '', ), 
                     creationtime = datetime.datetime.strptime('1975-12-30', '%Y-%m-%d').date(), 
-                    dialplan = ari_sync_sdk.models.dialplan_cep.DialplanCEP(
+                    dialplan = ari_async_sdk.models.dialplan_cep.DialplanCEP(
                         app_data = '', 
                         app_name = '', 
                         context = '', 
@@ -93,17 +93,17 @@ class TestBridgeBlindTransfer(unittest.TestCase):
                     name = '', 
                     state = '', ),
                 result = '',
-                transferee = ari_sync_sdk.models.channel.Channel(
+                transferee = ari_async_sdk.models.channel.Channel(
                     accountcode = '', 
-                    caller = ari_sync_sdk.models.caller_id.CallerID(
+                    caller = ari_async_sdk.models.caller_id.CallerID(
                         name = '', 
                         number = '', ), 
-                    channelvars = ari_sync_sdk.models.channelvars.channelvars(), 
-                    connected = ari_sync_sdk.models.caller_id.CallerID(
+                    channelvars = ari_async_sdk.models.channelvars.channelvars(), 
+                    connected = ari_async_sdk.models.caller_id.CallerID(
                         name = '', 
                         number = '', ), 
                     creationtime = datetime.datetime.strptime('1975-12-30', '%Y-%m-%d').date(), 
-                    dialplan = ari_sync_sdk.models.dialplan_cep.DialplanCEP(
+                    dialplan = ari_async_sdk.models.dialplan_cep.DialplanCEP(
                         app_data = '', 
                         app_name = '', 
                         context = '', 
@@ -116,17 +116,17 @@ class TestBridgeBlindTransfer(unittest.TestCase):
             )
         else:
             return BridgeBlindTransfer(
-                channel = ari_sync_sdk.models.channel.Channel(
+                channel = ari_async_sdk.models.channel.Channel(
                     accountcode = '', 
-                    caller = ari_sync_sdk.models.caller_id.CallerID(
+                    caller = ari_async_sdk.models.caller_id.CallerID(
                         name = '', 
                         number = '', ), 
-                    channelvars = ari_sync_sdk.models.channelvars.channelvars(), 
-                    connected = ari_sync_sdk.models.caller_id.CallerID(
+                    channelvars = ari_async_sdk.models.channelvars.channelvars(), 
+                    connected = ari_async_sdk.models.caller_id.CallerID(
                         name = '', 
                         number = '', ), 
                     creationtime = datetime.datetime.strptime('1975-12-30', '%Y-%m-%d').date(), 
-                    dialplan = ari_sync_sdk.models.dialplan_cep.DialplanCEP(
+                    dialplan = ari_async_sdk.models.dialplan_cep.DialplanCEP(
                         app_data = '', 
                         app_name = '', 
                         context = '', 

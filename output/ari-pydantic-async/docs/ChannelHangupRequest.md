@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from ari_sync_sdk.models.channel_hangup_request import ChannelHangupRequest
+from ari_async_sdk.models.channel_hangup_request import ChannelHangupRequest
 
 # TODO update the JSON string below
 json = "{}"

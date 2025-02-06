@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from ari_sync_sdk.models.status_info import StatusInfo  # noqa: E501
+from ari_async_sdk.models.status_info import StatusInfo  # noqa: E501
 
 class TestStatusInfo(unittest.TestCase):
     """StatusInfo unit test stubs"""

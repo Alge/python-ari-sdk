@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from ari_sync_sdk.models.contact_status_change import ContactStatusChange  # noqa: E501
+from ari_async_sdk.models.contact_status_change import ContactStatusChange  # noqa: E501
 
 class TestContactStatusChange(unittest.TestCase):
     """ContactStatusChange unit test stubs"""
@@ -36,12 +36,12 @@ class TestContactStatusChange(unittest.TestCase):
         model = ContactStatusChange()  # noqa: E501
         if include_optional:
             return ContactStatusChange(
-                contact_info = ari_sync_sdk.models.contact_info.ContactInfo(
+                contact_info = ari_async_sdk.models.contact_info.ContactInfo(
                     aor = '', 
                     contact_status = '', 
                     roundtrip_usec = '', 
                     uri = '', ),
-                endpoint = ari_sync_sdk.models.endpoint.Endpoint(
+                endpoint = ari_async_sdk.models.endpoint.Endpoint(
                     channel_ids = [
                         ''
                         ], 
@@ -51,12 +51,12 @@ class TestContactStatusChange(unittest.TestCase):
             )
         else:
             return ContactStatusChange(
-                contact_info = ari_sync_sdk.models.contact_info.ContactInfo(
+                contact_info = ari_async_sdk.models.contact_info.ContactInfo(
                     aor = '', 
                     contact_status = '', 
                     roundtrip_usec = '', 
                     uri = '', ),
-                endpoint = ari_sync_sdk.models.endpoint.Endpoint(
+                endpoint = ari_async_sdk.models.endpoint.Endpoint(
                     channel_ids = [
                         ''
                         ], 

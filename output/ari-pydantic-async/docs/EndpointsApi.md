@@ -1,4 +1,4 @@
-# ari_sync_sdk.EndpointsApi
+# ari_async_sdk.EndpointsApi
 
 All URIs are relative to *http://localhost:8088/ari*
 
@@ -21,22 +21,22 @@ Details for an endpoint.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.models.endpoint import Endpoint
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.models.endpoint import Endpoint
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.EndpointsApi(api_client)
+    api_instance = ari_async_sdk.EndpointsApi(api_client)
     tech = 'tech_example' # str | Technology of the endpoint
     resource = 'resource_example' # str | ID of the endpoint
 
@@ -88,22 +88,22 @@ List available endoints for a given endpoint technology.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.models.endpoint import Endpoint
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.models.endpoint import Endpoint
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.EndpointsApi(api_client)
+    api_instance = ari_async_sdk.EndpointsApi(api_client)
     tech = 'tech_example' # str | Technology of the endpoints (sip,iax2,...)
 
     try:
@@ -153,22 +153,22 @@ List all endpoints.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.models.endpoint import Endpoint
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.models.endpoint import Endpoint
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.EndpointsApi(api_client)
+    api_instance = ari_async_sdk.EndpointsApi(api_client)
 
     try:
         # List all endpoints.
@@ -214,21 +214,21 @@ Send a message to some technology URI or endpoint.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.EndpointsApi(api_client)
+    api_instance = ari_async_sdk.EndpointsApi(api_client)
     to = 'to_example' # str | The endpoint resource or technology specific URI to send the message to. Valid resources are sip, pjsip, and xmpp.
     var_from = 'var_from_example' # str | The endpoint resource or technology specific identity to send this message from. Valid resources are sip, pjsip, and xmpp.
     body = 'body_example' # str | The body of the message (optional)
@@ -282,21 +282,21 @@ Send a message to some endpoint in a technology.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.EndpointsApi(api_client)
+    api_instance = ari_async_sdk.EndpointsApi(api_client)
     tech = 'tech_example' # str | Technology of the endpoint
     resource = 'resource_example' # str | ID of the endpoint
     var_from = 'var_from_example' # str | The endpoint resource or technology specific identity to send this message from. Valid resources are sip, pjsip, and xmpp.

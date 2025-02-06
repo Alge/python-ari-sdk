@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from ari_sync_sdk.models.recording_finished import RecordingFinished  # noqa: E501
+from ari_async_sdk.models.recording_finished import RecordingFinished  # noqa: E501
 
 class TestRecordingFinished(unittest.TestCase):
     """RecordingFinished unit test stubs"""
@@ -36,7 +36,7 @@ class TestRecordingFinished(unittest.TestCase):
         model = RecordingFinished()  # noqa: E501
         if include_optional:
             return RecordingFinished(
-                recording = ari_sync_sdk.models.live_recording.LiveRecording(
+                recording = ari_async_sdk.models.live_recording.LiveRecording(
                     cause = '', 
                     duration = 56, 
                     format = '', 
@@ -48,7 +48,7 @@ class TestRecordingFinished(unittest.TestCase):
             )
         else:
             return RecordingFinished(
-                recording = ari_sync_sdk.models.live_recording.LiveRecording(
+                recording = ari_async_sdk.models.live_recording.LiveRecording(
                     cause = '', 
                     duration = 56, 
                     format = '', 

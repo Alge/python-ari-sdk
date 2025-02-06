@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from ari_sync_sdk.models.bridge_blind_transfer import BridgeBlindTransfer
+from ari_async_sdk.models.bridge_blind_transfer import BridgeBlindTransfer
 
 # TODO update the JSON string below
 json = "{}"

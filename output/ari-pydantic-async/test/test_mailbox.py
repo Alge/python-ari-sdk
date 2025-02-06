@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from ari_sync_sdk.models.mailbox import Mailbox  # noqa: E501
+from ari_async_sdk.models.mailbox import Mailbox  # noqa: E501
 
 class TestMailbox(unittest.TestCase):
     """Mailbox unit test stubs"""

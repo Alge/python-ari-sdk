@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from ari_sync_sdk.models.peer_status_change import PeerStatusChange
+from ari_async_sdk.models.peer_status_change import PeerStatusChange
 
 # TODO update the JSON string below
 json = "{}"

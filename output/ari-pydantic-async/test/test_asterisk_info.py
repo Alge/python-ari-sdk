@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from ari_sync_sdk.models.asterisk_info import AsteriskInfo  # noqa: E501
+from ari_async_sdk.models.asterisk_info import AsteriskInfo  # noqa: E501
 
 class TestAsteriskInfo(unittest.TestCase):
     """AsteriskInfo unit test stubs"""
@@ -36,26 +36,26 @@ class TestAsteriskInfo(unittest.TestCase):
         model = AsteriskInfo()  # noqa: E501
         if include_optional:
             return AsteriskInfo(
-                build = ari_sync_sdk.models.build_info.BuildInfo(
+                build = ari_async_sdk.models.build_info.BuildInfo(
                     date = '', 
                     kernel = '', 
                     machine = '', 
                     options = '', 
                     os = '', 
                     user = '', ),
-                config = ari_sync_sdk.models.config_info.ConfigInfo(
+                config = ari_async_sdk.models.config_info.ConfigInfo(
                     default_language = '', 
                     max_channels = 56, 
                     max_load = 1.337, 
                     max_open_files = 56, 
                     name = '', 
-                    setid = ari_sync_sdk.models.set_id.SetId(
+                    setid = ari_async_sdk.models.set_id.SetId(
                         group = '', 
                         user = '', ), ),
-                status = ari_sync_sdk.models.status_info.StatusInfo(
+                status = ari_async_sdk.models.status_info.StatusInfo(
                     last_reload_time = datetime.datetime.strptime('1975-12-30', '%Y-%m-%d').date(), 
                     startup_time = datetime.datetime.strptime('1975-12-30', '%Y-%m-%d').date(), ),
-                system = ari_sync_sdk.models.system_info.SystemInfo(
+                system = ari_async_sdk.models.system_info.SystemInfo(
                     entity_id = '', 
                     version = '', )
             )

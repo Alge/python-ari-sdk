@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from ari_sync_sdk.models.stasis_end import StasisEnd
+from ari_async_sdk.models.stasis_end import StasisEnd
 
 # TODO update the JSON string below
 json = "{}"

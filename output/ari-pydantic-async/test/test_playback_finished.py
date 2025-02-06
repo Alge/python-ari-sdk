@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from ari_sync_sdk.models.playback_finished import PlaybackFinished  # noqa: E501
+from ari_async_sdk.models.playback_finished import PlaybackFinished  # noqa: E501
 
 class TestPlaybackFinished(unittest.TestCase):
     """PlaybackFinished unit test stubs"""
@@ -36,7 +36,7 @@ class TestPlaybackFinished(unittest.TestCase):
         model = PlaybackFinished()  # noqa: E501
         if include_optional:
             return PlaybackFinished(
-                playback = ari_sync_sdk.models.playback.Playback(
+                playback = ari_async_sdk.models.playback.Playback(
                     id = '', 
                     language = '', 
                     media_uri = '', 
@@ -46,7 +46,7 @@ class TestPlaybackFinished(unittest.TestCase):
             )
         else:
             return PlaybackFinished(
-                playback = ari_sync_sdk.models.playback.Playback(
+                playback = ari_async_sdk.models.playback.Playback(
                     id = '', 
                     language = '', 
                     media_uri = '', 

@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from ari_sync_sdk.models.config_tuple import ConfigTuple  # noqa: E501
+from ari_async_sdk.models.config_tuple import ConfigTuple  # noqa: E501
 
 class TestConfigTuple(unittest.TestCase):
     """ConfigTuple unit test stubs"""

@@ -1,4 +1,4 @@
-# ari_sync_sdk.BridgesApi
+# ari_async_sdk.BridgesApi
 
 All URIs are relative to *http://localhost:8088/ari*
 
@@ -30,21 +30,21 @@ Add a channel to a bridge.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.BridgesApi(api_client)
+    api_instance = ari_async_sdk.BridgesApi(api_client)
     bridge_id = 'bridge_id_example' # str | Bridge's id
     channel = ['channel_example'] # List[str] | Ids of channels to add to bridge
     role = 'role_example' # str | Channel's role in the bridge (optional)
@@ -102,21 +102,21 @@ Removes any explicit video source in a multi-party mixing bridge. This operation
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.BridgesApi(api_client)
+    api_instance = ari_async_sdk.BridgesApi(api_client)
     bridge_id = 'bridge_id_example' # str | Bridge's id
 
     try:
@@ -166,22 +166,22 @@ This bridge persists until it has been shut down, or Asterisk has been shut down
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.models.bridge import Bridge
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.models.bridge import Bridge
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.BridgesApi(api_client)
+    api_instance = ari_async_sdk.BridgesApi(api_client)
     type = 'type_example' # str | Comma separated list of bridge type attributes (mixing, holding, dtmf_events, proxy_media, video_sfu). (optional)
     bridge_id = 'bridge_id_example' # str | Unique ID to give to the bridge being created. (optional)
     name = 'name_example' # str | Name to give to the bridge being created. (optional)
@@ -237,22 +237,22 @@ This bridge persists until it has been shut down, or Asterisk has been shut down
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.models.bridge import Bridge
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.models.bridge import Bridge
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.BridgesApi(api_client)
+    api_instance = ari_async_sdk.BridgesApi(api_client)
     bridge_id = 'bridge_id_example' # str | Unique ID to give to the bridge being created.
     type = 'type_example' # str | Comma separated list of bridge type attributes (mixing, holding, dtmf_events, proxy_media, video_sfu) to set. (optional)
     name = 'name_example' # str | Set the name of the bridge. (optional)
@@ -308,21 +308,21 @@ If any channels are in this bridge, they will be removed and resume whatever the
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.BridgesApi(api_client)
+    api_instance = ari_async_sdk.BridgesApi(api_client)
     bridge_id = 'bridge_id_example' # str | Bridge's id
 
     try:
@@ -370,22 +370,22 @@ Get bridge details.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.models.bridge import Bridge
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.models.bridge import Bridge
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.BridgesApi(api_client)
+    api_instance = ari_async_sdk.BridgesApi(api_client)
     bridge_id = 'bridge_id_example' # str | Bridge's id
 
     try:
@@ -435,22 +435,22 @@ List all active bridges in Asterisk.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.models.bridge import Bridge
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.models.bridge import Bridge
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.BridgesApi(api_client)
+    api_instance = ari_async_sdk.BridgesApi(api_client)
 
     try:
         # List all active bridges in Asterisk.
@@ -498,22 +498,22 @@ The media URI may be any of a number of URI's. Currently sound:, recording:, num
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.models.playback import Playback
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.models.playback import Playback
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.BridgesApi(api_client)
+    api_instance = ari_async_sdk.BridgesApi(api_client)
     bridge_id = 'bridge_id_example' # str | Bridge's id
     media = ['media_example'] # List[str] | Media URIs to play.
     lang = 'lang_example' # str | For sounds, selects language for sound. (optional)
@@ -575,22 +575,22 @@ The media URI may be any of a number of URI's. Currently sound:, recording:, num
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.models.playback import Playback
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.models.playback import Playback
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.BridgesApi(api_client)
+    api_instance = ari_async_sdk.BridgesApi(api_client)
     bridge_id = 'bridge_id_example' # str | Bridge's id
     playback_id = 'playback_id_example' # str | Playback ID.
     media = ['media_example'] # List[str] | Media URIs to play.
@@ -652,22 +652,22 @@ This records the mixed audio from all channels participating in this bridge.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.models.live_recording import LiveRecording
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.models.live_recording import LiveRecording
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.BridgesApi(api_client)
+    api_instance = ari_async_sdk.BridgesApi(api_client)
     bridge_id = 'bridge_id_example' # str | Bridge's id
     name = 'name_example' # str | Recording's filename
     format = 'format_example' # str | Format to encode audio in
@@ -731,21 +731,21 @@ Remove a channel from a bridge.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.BridgesApi(api_client)
+    api_instance = ari_async_sdk.BridgesApi(api_client)
     bridge_id = 'bridge_id_example' # str | Bridge's id
     channel = ['channel_example'] # List[str] | Ids of channels to remove from bridge
 
@@ -795,21 +795,21 @@ Set a channel as the video source in a multi-party mixing bridge. This operation
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.BridgesApi(api_client)
+    api_instance = ari_async_sdk.BridgesApi(api_client)
     bridge_id = 'bridge_id_example' # str | Bridge's id
     channel_id = 'channel_id_example' # str | Channel's id
 
@@ -859,21 +859,21 @@ Play music on hold to a bridge or change the MOH class that is playing.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.BridgesApi(api_client)
+    api_instance = ari_async_sdk.BridgesApi(api_client)
     bridge_id = 'bridge_id_example' # str | Bridge's id
     moh_class = 'moh_class_example' # str | Channel's id (optional)
 
@@ -925,21 +925,21 @@ This will only stop music on hold being played via POST bridges/{bridgeId}/moh.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.BridgesApi(api_client)
+    api_instance = ari_async_sdk.BridgesApi(api_client)
     bridge_id = 'bridge_id_example' # str | Bridge's id
 
     try:

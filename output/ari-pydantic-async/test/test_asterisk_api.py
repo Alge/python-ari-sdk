@@ -14,7 +14,7 @@
 
 import unittest
 
-from ari_sync_sdk.api.asterisk_api import AsteriskApi  # noqa: E501
+from ari_async_sdk.api.asterisk_api import AsteriskApi  # noqa: E501
 
 
 class TestAsteriskApi(unittest.IsolatedAsyncioTestCase):

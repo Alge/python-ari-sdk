@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from ari_sync_sdk.models.bridge import Bridge  # noqa: E501
+from ari_async_sdk.models.bridge import Bridge  # noqa: E501
 
 class TestBridge(unittest.TestCase):
     """Bridge unit test stubs"""

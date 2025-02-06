@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from ari_sync_sdk.models.variable import Variable
+from ari_async_sdk.models.variable import Variable
 
 # TODO update the JSON string below
 json = "{}"

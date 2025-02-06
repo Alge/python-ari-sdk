@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from ari_sync_sdk.models.missing_params import MissingParams  # noqa: E501
+from ari_async_sdk.models.missing_params import MissingParams  # noqa: E501
 
 class TestMissingParams(unittest.TestCase):
     """MissingParams unit test stubs"""

@@ -1,4 +1,4 @@
-# ari_sync_sdk.AsteriskApi
+# ari_async_sdk.AsteriskApi
 
 All URIs are relative to *http://localhost:8088/ari*
 
@@ -32,21 +32,21 @@ Adds a log channel.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.AsteriskApi(api_client)
+    api_instance = ari_async_sdk.AsteriskApi(api_client)
     log_channel_name = 'log_channel_name_example' # str | The log channel to add
     configuration = 'configuration_example' # str | levels of the log channel
 
@@ -96,21 +96,21 @@ Deletes a log channel.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.AsteriskApi(api_client)
+    api_instance = ari_async_sdk.AsteriskApi(api_client)
     log_channel_name = 'log_channel_name_example' # str | Log channels name
 
     try:
@@ -158,21 +158,21 @@ Delete a dynamic configuration object.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.AsteriskApi(api_client)
+    api_instance = ari_async_sdk.AsteriskApi(api_client)
     config_class = 'config_class_example' # str | The configuration class containing dynamic configuration objects.
     object_type = 'object_type_example' # str | The type of configuration object to delete.
     id = 'id_example' # str | The unique identifier of the object to delete.
@@ -224,22 +224,22 @@ Get the value of a global variable.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.models.variable import Variable
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.models.variable import Variable
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.AsteriskApi(api_client)
+    api_instance = ari_async_sdk.AsteriskApi(api_client)
     variable = 'variable_example' # str | The variable to get
 
     try:
@@ -289,22 +289,22 @@ Gets Asterisk system information.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.models.asterisk_info import AsteriskInfo
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.models.asterisk_info import AsteriskInfo
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.AsteriskApi(api_client)
+    api_instance = ari_async_sdk.AsteriskApi(api_client)
     only = ['only_example'] # List[str] | Filter information returned (optional)
 
     try:
@@ -354,22 +354,22 @@ Get Asterisk module information.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.models.module import Module
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.models.module import Module
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.AsteriskApi(api_client)
+    api_instance = ari_async_sdk.AsteriskApi(api_client)
     module_name = 'module_name_example' # str | Module's name
 
     try:
@@ -419,22 +419,22 @@ Retrieve a dynamic configuration object.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.models.config_tuple import ConfigTuple
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.models.config_tuple import ConfigTuple
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.AsteriskApi(api_client)
+    api_instance = ari_async_sdk.AsteriskApi(api_client)
     config_class = 'config_class_example' # str | The configuration class containing dynamic configuration objects.
     object_type = 'object_type_example' # str | The type of configuration object to retrieve.
     id = 'id_example' # str | The unique identifier of the object to retrieve.
@@ -488,22 +488,22 @@ Gets Asterisk log channel information.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.models.log_channel import LogChannel
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.models.log_channel import LogChannel
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.AsteriskApi(api_client)
+    api_instance = ari_async_sdk.AsteriskApi(api_client)
 
     try:
         # Gets Asterisk log channel information.
@@ -549,22 +549,22 @@ List Asterisk modules.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.models.module import Module
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.models.module import Module
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.AsteriskApi(api_client)
+    api_instance = ari_async_sdk.AsteriskApi(api_client)
 
     try:
         # List Asterisk modules.
@@ -610,21 +610,21 @@ Load an Asterisk module.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.AsteriskApi(api_client)
+    api_instance = ari_async_sdk.AsteriskApi(api_client)
     module_name = 'module_name_example' # str | Module's name
 
     try:
@@ -672,22 +672,22 @@ Response pong message.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.models.asterisk_ping import AsteriskPing
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.models.asterisk_ping import AsteriskPing
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.AsteriskApi(api_client)
+    api_instance = ari_async_sdk.AsteriskApi(api_client)
 
     try:
         # Response pong message.
@@ -733,21 +733,21 @@ Reload an Asterisk module.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.AsteriskApi(api_client)
+    api_instance = ari_async_sdk.AsteriskApi(api_client)
     module_name = 'module_name_example' # str | Module's name
 
     try:
@@ -795,21 +795,21 @@ Rotates a log channel.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.AsteriskApi(api_client)
+    api_instance = ari_async_sdk.AsteriskApi(api_client)
     log_channel_name = 'log_channel_name_example' # str | Log channel's name
 
     try:
@@ -857,21 +857,21 @@ Set the value of a global variable.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.AsteriskApi(api_client)
+    api_instance = ari_async_sdk.AsteriskApi(api_client)
     variable = 'variable_example' # str | The variable to set
     value = 'value_example' # str | The value to set the variable to (optional)
 
@@ -921,21 +921,21 @@ Unload an Asterisk module.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.AsteriskApi(api_client)
+    api_instance = ari_async_sdk.AsteriskApi(api_client)
     module_name = 'module_name_example' # str | Module's name
 
     try:
@@ -983,22 +983,22 @@ Create or update a dynamic configuration object.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.models.config_tuple import ConfigTuple
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.models.config_tuple import ConfigTuple
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.AsteriskApi(api_client)
+    api_instance = ari_async_sdk.AsteriskApi(api_client)
     config_class = 'config_class_example' # str | The configuration class containing dynamic configuration objects.
     object_type = 'object_type_example' # str | The type of configuration object to create or update.
     id = 'id_example' # str | The unique identifier of the object to create or update.

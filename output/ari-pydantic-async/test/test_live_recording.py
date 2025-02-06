@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from ari_sync_sdk.models.live_recording import LiveRecording  # noqa: E501
+from ari_async_sdk.models.live_recording import LiveRecording  # noqa: E501
 
 class TestLiveRecording(unittest.TestCase):
     """LiveRecording unit test stubs"""

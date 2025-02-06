@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from ari_sync_sdk.models.playback import Playback  # noqa: E501
+from ari_async_sdk.models.playback import Playback  # noqa: E501
 
 class TestPlayback(unittest.TestCase):
     """Playback unit test stubs"""

@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from ari_sync_sdk.models.channel_hangup_request import ChannelHangupRequest  # noqa: E501
+from ari_async_sdk.models.channel_hangup_request import ChannelHangupRequest  # noqa: E501
 
 class TestChannelHangupRequest(unittest.TestCase):
     """ChannelHangupRequest unit test stubs"""
@@ -37,17 +37,17 @@ class TestChannelHangupRequest(unittest.TestCase):
         if include_optional:
             return ChannelHangupRequest(
                 cause = 56,
-                channel = ari_sync_sdk.models.channel.Channel(
+                channel = ari_async_sdk.models.channel.Channel(
                     accountcode = '', 
-                    caller = ari_sync_sdk.models.caller_id.CallerID(
+                    caller = ari_async_sdk.models.caller_id.CallerID(
                         name = '', 
                         number = '', ), 
-                    channelvars = ari_sync_sdk.models.channelvars.channelvars(), 
-                    connected = ari_sync_sdk.models.caller_id.CallerID(
+                    channelvars = ari_async_sdk.models.channelvars.channelvars(), 
+                    connected = ari_async_sdk.models.caller_id.CallerID(
                         name = '', 
                         number = '', ), 
                     creationtime = datetime.datetime.strptime('1975-12-30', '%Y-%m-%d').date(), 
-                    dialplan = ari_sync_sdk.models.dialplan_cep.DialplanCEP(
+                    dialplan = ari_async_sdk.models.dialplan_cep.DialplanCEP(
                         app_data = '', 
                         app_name = '', 
                         context = '', 
@@ -61,17 +61,17 @@ class TestChannelHangupRequest(unittest.TestCase):
             )
         else:
             return ChannelHangupRequest(
-                channel = ari_sync_sdk.models.channel.Channel(
+                channel = ari_async_sdk.models.channel.Channel(
                     accountcode = '', 
-                    caller = ari_sync_sdk.models.caller_id.CallerID(
+                    caller = ari_async_sdk.models.caller_id.CallerID(
                         name = '', 
                         number = '', ), 
-                    channelvars = ari_sync_sdk.models.channelvars.channelvars(), 
-                    connected = ari_sync_sdk.models.caller_id.CallerID(
+                    channelvars = ari_async_sdk.models.channelvars.channelvars(), 
+                    connected = ari_async_sdk.models.caller_id.CallerID(
                         name = '', 
                         number = '', ), 
                     creationtime = datetime.datetime.strptime('1975-12-30', '%Y-%m-%d').date(), 
-                    dialplan = ari_sync_sdk.models.dialplan_cep.DialplanCEP(
+                    dialplan = ari_async_sdk.models.dialplan_cep.DialplanCEP(
                         app_data = '', 
                         app_name = '', 
                         context = '', 

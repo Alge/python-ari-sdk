@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from ari_sync_sdk.models.playback_finished import PlaybackFinished
+from ari_async_sdk.models.playback_finished import PlaybackFinished
 
 # TODO update the JSON string below
 json = "{}"

@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from ari_sync_sdk.models.bridge_video_source_changed import BridgeVideoSourceChanged  # noqa: E501
+from ari_async_sdk.models.bridge_video_source_changed import BridgeVideoSourceChanged  # noqa: E501
 
 class TestBridgeVideoSourceChanged(unittest.TestCase):
     """BridgeVideoSourceChanged unit test stubs"""
@@ -36,7 +36,7 @@ class TestBridgeVideoSourceChanged(unittest.TestCase):
         model = BridgeVideoSourceChanged()  # noqa: E501
         if include_optional:
             return BridgeVideoSourceChanged(
-                bridge = ari_sync_sdk.models.bridge.Bridge(
+                bridge = ari_async_sdk.models.bridge.Bridge(
                     bridge_class = '', 
                     bridge_type = '', 
                     channels = [
@@ -53,7 +53,7 @@ class TestBridgeVideoSourceChanged(unittest.TestCase):
             )
         else:
             return BridgeVideoSourceChanged(
-                bridge = ari_sync_sdk.models.bridge.Bridge(
+                bridge = ari_async_sdk.models.bridge.Bridge(
                     bridge_class = '', 
                     bridge_type = '', 
                     channels = [

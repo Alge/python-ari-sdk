@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from ari_sync_sdk.models.module import Module  # noqa: E501
+from ari_async_sdk.models.module import Module  # noqa: E501
 
 class TestModule(unittest.TestCase):
     """Module unit test stubs"""

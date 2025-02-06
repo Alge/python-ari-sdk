@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from ari_sync_sdk.models.application_move_failed import ApplicationMoveFailed
+from ari_async_sdk.models.application_move_failed import ApplicationMoveFailed
 
 # TODO update the JSON string below
 json = "{}"

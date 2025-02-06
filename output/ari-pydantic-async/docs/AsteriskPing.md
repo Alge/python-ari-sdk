@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from ari_sync_sdk.models.asterisk_ping import AsteriskPing
+from ari_async_sdk.models.asterisk_ping import AsteriskPing
 
 # TODO update the JSON string below
 json = "{}"

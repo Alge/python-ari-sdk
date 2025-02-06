@@ -61,7 +61,7 @@ pydantic-sync: $(GENERATOR_CLI)
 	java -jar $(GENERATOR_CLI) generate \
 	    -i $(OPENAPI_YAML) \
 	    -g python-pydantic-v1 \
-	    --package-name $(SYNC_PACKAGE) \
+	    --package-name $(PYDANTIC_SYNC_PACKAGE) \
 	    --additional-properties=\
 projectName=$(PYDANTIC_SYNC_PACKAGE),\
 packageName=$(PYDANTIC_SYNC_PACKAGE),\
@@ -77,7 +77,7 @@ pydantic-async: $(GENERATOR_CLI)
 	java -jar $(GENERATOR_CLI) generate \
 	    -i $(OPENAPI_YAML) \
 	    -g python-pydantic-v1 \
-	    --package-name $(SYNC_PACKAGE) \
+	    --package-name $(PYDANTIC_ASYNC_PACKAGE) \
 	    --additional-properties=\
 library=asyncio,\
 projectName=$(PYDANTIC_ASYNC_PACKAGE),\

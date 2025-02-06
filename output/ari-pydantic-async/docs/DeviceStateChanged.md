@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from ari_sync_sdk.models.device_state_changed import DeviceStateChanged
+from ari_async_sdk.models.device_state_changed import DeviceStateChanged
 
 # TODO update the JSON string below
 json = "{}"

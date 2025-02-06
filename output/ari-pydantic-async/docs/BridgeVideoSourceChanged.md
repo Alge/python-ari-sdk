@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from ari_sync_sdk.models.bridge_video_source_changed import BridgeVideoSourceChanged
+from ari_async_sdk.models.bridge_video_source_changed import BridgeVideoSourceChanged
 
 # TODO update the JSON string below
 json = "{}"

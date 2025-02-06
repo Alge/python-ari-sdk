@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from ari_sync_sdk.models.variable import Variable  # noqa: E501
+from ari_async_sdk.models.variable import Variable  # noqa: E501
 
 class TestVariable(unittest.TestCase):
     """Variable unit test stubs"""

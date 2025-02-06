@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "ari_sync_sdk"
+name = "ari_async_sdk"
 version = "1.0.0"
 description = "Asterisk ARI"
 authors = ["OpenAPI Generator Community <team@openapitools.org>"]
@@ -7,7 +7,7 @@ license = "NoLicense"
 readme = "README.md"
 repository = "https://github.com/GIT_USER_ID/GIT_REPO_ID"
 keywords = ["OpenAPI", "OpenAPI-Generator", "Asterisk ARI"]
-include = ["ari_sync_sdk/py.typed"]
+include = ["ari_async_sdk/py.typed"]
 
 [tool.poetry.dependencies]
 python = "^3.8"

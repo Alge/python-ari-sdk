@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from ari_sync_sdk.models.sound import Sound  # noqa: E501
+from ari_async_sdk.models.sound import Sound  # noqa: E501
 
 class TestSound(unittest.TestCase):
     """Sound unit test stubs"""
@@ -37,7 +37,7 @@ class TestSound(unittest.TestCase):
         if include_optional:
             return Sound(
                 formats = [
-                    ari_sync_sdk.models.format_lang_pair.FormatLangPair(
+                    ari_async_sdk.models.format_lang_pair.FormatLangPair(
                         format = '', 
                         language = '', )
                     ],
@@ -47,7 +47,7 @@ class TestSound(unittest.TestCase):
         else:
             return Sound(
                 formats = [
-                    ari_sync_sdk.models.format_lang_pair.FormatLangPair(
+                    ari_async_sdk.models.format_lang_pair.FormatLangPair(
                         format = '', 
                         language = '', )
                     ],

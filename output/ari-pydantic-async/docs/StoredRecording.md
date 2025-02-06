@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from ari_sync_sdk.models.stored_recording import StoredRecording
+from ari_async_sdk.models.stored_recording import StoredRecording
 
 # TODO update the JSON string below
 json = "{}"

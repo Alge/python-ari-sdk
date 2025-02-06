@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from ari_sync_sdk.models.bridge import Bridge
+from ari_async_sdk.models.bridge import Bridge
 
 # TODO update the JSON string below
 json = "{}"

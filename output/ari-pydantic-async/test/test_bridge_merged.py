@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from ari_sync_sdk.models.bridge_merged import BridgeMerged  # noqa: E501
+from ari_async_sdk.models.bridge_merged import BridgeMerged  # noqa: E501
 
 class TestBridgeMerged(unittest.TestCase):
     """BridgeMerged unit test stubs"""
@@ -36,7 +36,7 @@ class TestBridgeMerged(unittest.TestCase):
         model = BridgeMerged()  # noqa: E501
         if include_optional:
             return BridgeMerged(
-                bridge = ari_sync_sdk.models.bridge.Bridge(
+                bridge = ari_async_sdk.models.bridge.Bridge(
                     bridge_class = '', 
                     bridge_type = '', 
                     channels = [
@@ -49,7 +49,7 @@ class TestBridgeMerged(unittest.TestCase):
                     technology = '', 
                     video_mode = '', 
                     video_source_id = '', ),
-                bridge_from = ari_sync_sdk.models.bridge.Bridge(
+                bridge_from = ari_async_sdk.models.bridge.Bridge(
                     bridge_class = '', 
                     bridge_type = '', 
                     channels = [
@@ -65,7 +65,7 @@ class TestBridgeMerged(unittest.TestCase):
             )
         else:
             return BridgeMerged(
-                bridge = ari_sync_sdk.models.bridge.Bridge(
+                bridge = ari_async_sdk.models.bridge.Bridge(
                     bridge_class = '', 
                     bridge_type = '', 
                     channels = [
@@ -78,7 +78,7 @@ class TestBridgeMerged(unittest.TestCase):
                     technology = '', 
                     video_mode = '', 
                     video_source_id = '', ),
-                bridge_from = ari_sync_sdk.models.bridge.Bridge(
+                bridge_from = ari_async_sdk.models.bridge.Bridge(
                     bridge_class = '', 
                     bridge_type = '', 
                     channels = [

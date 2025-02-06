@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from ari_sync_sdk.models.bridge_created import BridgeCreated  # noqa: E501
+from ari_async_sdk.models.bridge_created import BridgeCreated  # noqa: E501
 
 class TestBridgeCreated(unittest.TestCase):
     """BridgeCreated unit test stubs"""
@@ -36,7 +36,7 @@ class TestBridgeCreated(unittest.TestCase):
         model = BridgeCreated()  # noqa: E501
         if include_optional:
             return BridgeCreated(
-                bridge = ari_sync_sdk.models.bridge.Bridge(
+                bridge = ari_async_sdk.models.bridge.Bridge(
                     bridge_class = '', 
                     bridge_type = '', 
                     channels = [
@@ -52,7 +52,7 @@ class TestBridgeCreated(unittest.TestCase):
             )
         else:
             return BridgeCreated(
-                bridge = ari_sync_sdk.models.bridge.Bridge(
+                bridge = ari_async_sdk.models.bridge.Bridge(
                     bridge_class = '', 
                     bridge_type = '', 
                     channels = [

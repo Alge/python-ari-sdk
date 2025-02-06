@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from ari_sync_sdk.models.caller_id import CallerID  # noqa: E501
+from ari_async_sdk.models.caller_id import CallerID  # noqa: E501
 
 class TestCallerID(unittest.TestCase):
     """CallerID unit test stubs"""

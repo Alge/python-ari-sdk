@@ -14,7 +14,7 @@
 
 import unittest
 
-from ari_sync_sdk.api.device_states_api import DeviceStatesApi  # noqa: E501
+from ari_async_sdk.api.device_states_api import DeviceStatesApi  # noqa: E501
 
 
 class TestDeviceStatesApi(unittest.IsolatedAsyncioTestCase):

@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from ari_sync_sdk.models.caller_id import CallerID
+from ari_async_sdk.models.caller_id import CallerID
 
 # TODO update the JSON string below
 json = "{}"

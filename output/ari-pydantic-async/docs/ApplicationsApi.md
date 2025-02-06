@@ -1,4 +1,4 @@
-# ari_sync_sdk.ApplicationsApi
+# ari_async_sdk.ApplicationsApi
 
 All URIs are relative to *http://localhost:8088/ari*
 
@@ -23,22 +23,22 @@ Allowed and/or disallowed event type filtering can be done. The body (parameter)
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.models.application import Application
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.models.application import Application
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.ApplicationsApi(api_client)
+    api_instance = ari_async_sdk.ApplicationsApi(api_client)
     application_name = 'application_name_example' # str | Application's name
     filter = None # object | Specify which event types to allow/disallow (optional)
 
@@ -90,22 +90,22 @@ Get details of an application.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.models.application import Application
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.models.application import Application
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.ApplicationsApi(api_client)
+    api_instance = ari_async_sdk.ApplicationsApi(api_client)
     application_name = 'application_name_example' # str | Application's name
 
     try:
@@ -155,22 +155,22 @@ List all applications.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.models.application import Application
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.models.application import Application
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.ApplicationsApi(api_client)
+    api_instance = ari_async_sdk.ApplicationsApi(api_client)
 
     try:
         # List all applications.
@@ -218,22 +218,22 @@ Returns the state of the application after the subscriptions have changed
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.models.application import Application
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.models.application import Application
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.ApplicationsApi(api_client)
+    api_instance = ari_async_sdk.ApplicationsApi(api_client)
     application_name = 'application_name_example' # str | Application's name
     event_source = ['event_source_example'] # List[str] | URI for event source (channel:{channelId}, bridge:{bridgeId}, endpoint:{tech}[/{resource}], deviceState:{deviceName}
 
@@ -287,22 +287,22 @@ Returns the state of the application after the subscriptions have changed
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.models.application import Application
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.models.application import Application
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.ApplicationsApi(api_client)
+    api_instance = ari_async_sdk.ApplicationsApi(api_client)
     application_name = 'application_name_example' # str | Application's name
     event_source = ['event_source_example'] # List[str] | URI for event source (channel:{channelId}, bridge:{bridgeId}, endpoint:{tech}[/{resource}], deviceState:{deviceName}
 

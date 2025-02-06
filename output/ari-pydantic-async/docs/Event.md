@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from ari_sync_sdk.models.event import Event
+from ari_async_sdk.models.event import Event
 
 # TODO update the JSON string below
 json = "{}"

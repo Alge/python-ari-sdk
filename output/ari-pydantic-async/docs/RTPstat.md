@@ -41,7 +41,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from ari_sync_sdk.models.rt_pstat import RTPstat
+from ari_async_sdk.models.rt_pstat import RTPstat
 
 # TODO update the JSON string below
 json = "{}"

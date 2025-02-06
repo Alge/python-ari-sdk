@@ -14,7 +14,7 @@
 
 import unittest
 
-from ari_sync_sdk.api.endpoints_api import EndpointsApi  # noqa: E501
+from ari_async_sdk.api.endpoints_api import EndpointsApi  # noqa: E501
 
 
 class TestEndpointsApi(unittest.IsolatedAsyncioTestCase):

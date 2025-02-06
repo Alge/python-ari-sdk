@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from ari_sync_sdk.models.channel_dtmf_received import ChannelDtmfReceived
+from ari_async_sdk.models.channel_dtmf_received import ChannelDtmfReceived
 
 # TODO update the JSON string below
 json = "{}"

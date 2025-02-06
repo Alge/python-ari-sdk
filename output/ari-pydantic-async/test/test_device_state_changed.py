@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from ari_sync_sdk.models.device_state_changed import DeviceStateChanged  # noqa: E501
+from ari_async_sdk.models.device_state_changed import DeviceStateChanged  # noqa: E501
 
 class TestDeviceStateChanged(unittest.TestCase):
     """DeviceStateChanged unit test stubs"""
@@ -36,13 +36,13 @@ class TestDeviceStateChanged(unittest.TestCase):
         model = DeviceStateChanged()  # noqa: E501
         if include_optional:
             return DeviceStateChanged(
-                device_state = ari_sync_sdk.models.device_state.DeviceState(
+                device_state = ari_async_sdk.models.device_state.DeviceState(
                     name = '', 
                     state = '', )
             )
         else:
             return DeviceStateChanged(
-                device_state = ari_sync_sdk.models.device_state.DeviceState(
+                device_state = ari_async_sdk.models.device_state.DeviceState(
                     name = '', 
                     state = '', ),
         )

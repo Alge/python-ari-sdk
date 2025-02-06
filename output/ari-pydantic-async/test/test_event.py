@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from ari_sync_sdk.models.event import Event  # noqa: E501
+from ari_async_sdk.models.event import Event  # noqa: E501
 
 class TestEvent(unittest.TestCase):
     """Event unit test stubs"""

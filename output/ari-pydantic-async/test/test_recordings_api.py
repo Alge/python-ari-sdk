@@ -14,7 +14,7 @@
 
 import unittest
 
-from ari_sync_sdk.api.recordings_api import RecordingsApi  # noqa: E501
+from ari_async_sdk.api.recordings_api import RecordingsApi  # noqa: E501
 
 
 class TestRecordingsApi(unittest.IsolatedAsyncioTestCase):

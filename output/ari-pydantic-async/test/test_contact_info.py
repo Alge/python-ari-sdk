@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from ari_sync_sdk.models.contact_info import ContactInfo  # noqa: E501
+from ari_async_sdk.models.contact_info import ContactInfo  # noqa: E501
 
 class TestContactInfo(unittest.TestCase):
     """ContactInfo unit test stubs"""

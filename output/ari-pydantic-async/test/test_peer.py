@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from ari_sync_sdk.models.peer import Peer  # noqa: E501
+from ari_async_sdk.models.peer import Peer  # noqa: E501
 
 class TestPeer(unittest.TestCase):
     """Peer unit test stubs"""

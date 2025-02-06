@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from ari_sync_sdk.models.format_lang_pair import FormatLangPair  # noqa: E501
+from ari_async_sdk.models.format_lang_pair import FormatLangPair  # noqa: E501
 
 class TestFormatLangPair(unittest.TestCase):
     """FormatLangPair unit test stubs"""

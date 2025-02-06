@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from ari_sync_sdk.models.contact_status_change import ContactStatusChange
+from ari_async_sdk.models.contact_status_change import ContactStatusChange
 
 # TODO update the JSON string below
 json = "{}"

@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from ari_sync_sdk.models.dial import Dial
+from ari_async_sdk.models.dial import Dial
 
 # TODO update the JSON string below
 json = "{}"

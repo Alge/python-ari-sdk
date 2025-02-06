@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from ari_sync_sdk.models.log_channel import LogChannel  # noqa: E501
+from ari_async_sdk.models.log_channel import LogChannel  # noqa: E501
 
 class TestLogChannel(unittest.TestCase):
     """LogChannel unit test stubs"""

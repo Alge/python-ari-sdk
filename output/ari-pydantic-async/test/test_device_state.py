@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from ari_sync_sdk.models.device_state import DeviceState  # noqa: E501
+from ari_async_sdk.models.device_state import DeviceState  # noqa: E501
 
 class TestDeviceState(unittest.TestCase):
     """DeviceState unit test stubs"""

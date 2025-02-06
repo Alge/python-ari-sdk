@@ -1,4 +1,4 @@
-# ari_sync_sdk.EventsApi
+# ari_async_sdk.EventsApi
 
 All URIs are relative to *http://localhost:8088/ari*
 
@@ -18,22 +18,22 @@ WebSocket connection for events.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.models.message import Message
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.models.message import Message
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.EventsApi(api_client)
+    api_instance = ari_async_sdk.EventsApi(api_client)
     app = ['app_example'] # List[str] | Applications to subscribe to.
     subscribe_all = True # bool | Subscribe to all Asterisk events. If provided, the applications listed will be subscribed to all events, effectively disabling the application specific subscriptions. Default is 'false'. (optional)
 
@@ -85,21 +85,21 @@ Generate a user event.
 ```python
 import time
 import os
-import ari_sync_sdk
-from ari_sync_sdk.rest import ApiException
+import ari_async_sdk
+from ari_async_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8088/ari
 # See configuration.py for a list of all supported configuration parameters.
-configuration = ari_sync_sdk.Configuration(
+configuration = ari_async_sdk.Configuration(
     host = "http://localhost:8088/ari"
 )
 
 
 # Enter a context with an instance of the API client
-async with ari_sync_sdk.ApiClient(configuration) as api_client:
+async with ari_async_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ari_sync_sdk.EventsApi(api_client)
+    api_instance = ari_async_sdk.EventsApi(api_client)
     event_name = 'event_name_example' # str | Event name
     application = 'application_example' # str | The name of the application that will receive this event
     source = ['source_example'] # List[str] | URI for event source (channel:{channelId}, bridge:{bridgeId}, endpoint:{tech}/{resource}, deviceState:{deviceName} (optional)

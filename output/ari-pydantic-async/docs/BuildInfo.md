@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from ari_sync_sdk.models.build_info import BuildInfo
+from ari_async_sdk.models.build_info import BuildInfo
 
 # TODO update the JSON string below
 json = "{}"
