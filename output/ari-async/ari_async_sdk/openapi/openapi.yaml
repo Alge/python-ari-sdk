@@ -1,0 +1,5226 @@
+openapi: 3.0.1
+info:
+  title: Asterisk ARI
+  version: 6.0.0
+servers:
+- url: http://localhost:8088/ari
+tags:
+- description: Stasis application resources
+  name: applications
+- description: Asterisk resources
+  name: asterisk
+- description: Bridge resources
+  name: bridges
+- description: Channel resources
+  name: channels
+- description: Device state resources
+  name: deviceStates
+- description: Endpoint resources
+  name: endpoints
+- description: WebSocket resource
+  name: events
+- description: Mailboxes resources
+  name: mailboxes
+- description: Playback control resources
+  name: playbacks
+- description: Recording resources
+  name: recordings
+- description: Sound resources
+  name: sounds
+paths:
+  /applications:
+    get:
+      operationId: list
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/Application'
+                type: array
+          description: No response was specified
+      summary: List all applications.
+      tags:
+      - applications
+      x-openapi-router-controller: ari_async_sdk.controllers.applications_controller
+  /applications/{applicationName}:
+    get:
+      operationId: get
+      parameters:
+      - description: Application's name
+        explode: false
+        in: path
+        name: applicationName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Application'
+          description: No response was specified
+      summary: Get details of an application.
+      tags:
+      - applications
+      x-openapi-router-controller: ari_async_sdk.controllers.applications_controller
+  /applications/{applicationName}/eventFilter:
+    put:
+      description: "Allowed and/or disallowed event type filtering can be done. The\
+        \ body (parameter) should specify a JSON key/value object that describes the\
+        \ type of event filtering needed. One, or both of the following keys can be\
+        \ designated:<br /><br />\"allowed\" - Specifies an allowed list of event\
+        \ types<br />\"disallowed\" - Specifies a disallowed list of event types<br\
+        \ /><br />Further, each of those key's value should be a JSON array that holds\
+        \ zero, or more JSON key/value objects. Each of these objects must contain\
+        \ the following key with an associated value:<br /><br />\"type\" - The type\
+        \ name of the event to filter<br /><br />The value must be the string name\
+        \ (case sensitive) of the event type that needs filtering. For example:<br\
+        \ /><br />{ \"allowed\": [ { \"type\": \"StasisStart\" }, { \"type\": \"StasisEnd\"\
+        \ } ] }<br /><br />As this specifies only an allowed list, then only those\
+        \ two event type messages are sent to the application. No other event messages\
+        \ are sent.<br /><br />The following rules apply:<br /><br />* If the body\
+        \ is empty, both the allowed and disallowed filters are set empty.<br />*\
+        \ If both list types are given then both are set to their respective values\
+        \ (note, specifying an empty array for a given type sets that type to empty).<br\
+        \ />* If only one list type is given then only that type is set. The other\
+        \ type is not updated.<br />* An empty \"allowed\" list means all events are\
+        \ allowed.<br />* An empty \"disallowed\" list means no events are disallowed.<br\
+        \ />* Disallowed events take precedence over allowed events if the event type\
+        \ is specified in both lists."
+      operationId: filter
+      parameters:
+      - description: Application's name
+        explode: false
+        in: path
+        name: applicationName
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              type: object
+        description: Specify which event types to allow/disallow
+        required: false
+        x-body-name: filter
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Application'
+          description: No response was specified
+      summary: Filter application events types.
+      tags:
+      - applications
+      x-codegen-request-body-name: filter
+      x-openapi-router-controller: ari_async_sdk.controllers.applications_controller
+  /applications/{applicationName}/subscription:
+    delete:
+      description: Returns the state of the application after the subscriptions have
+        changed
+      operationId: unsubscribe
+      parameters:
+      - description: Application's name
+        explode: false
+        in: path
+        name: applicationName
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: "URI for event source (channel:{channelId}, bridge:{bridgeId},\
+          \ endpoint:{tech}[/{resource}], deviceState:{deviceName}"
+        explode: false
+        in: query
+        name: eventSource
+        required: true
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Application'
+          description: No response was specified
+      summary: Unsubscribe an application from an event source.
+      tags:
+      - applications
+      x-openapi-router-controller: ari_async_sdk.controllers.applications_controller
+    post:
+      description: Returns the state of the application after the subscriptions have
+        changed
+      operationId: subscribe
+      parameters:
+      - description: Application's name
+        explode: false
+        in: path
+        name: applicationName
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: "URI for event source (channel:{channelId}, bridge:{bridgeId},\
+          \ endpoint:{tech}[/{resource}], deviceState:{deviceName}"
+        explode: false
+        in: query
+        name: eventSource
+        required: true
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Application'
+          description: No response was specified
+      summary: Subscribe an application to a event source.
+      tags:
+      - applications
+      x-openapi-router-controller: ari_async_sdk.controllers.applications_controller
+  /asterisk/config/dynamic/{configClass}/{objectType}/{id}:
+    delete:
+      operationId: delete_object
+      parameters:
+      - description: The configuration class containing dynamic configuration objects.
+        explode: false
+        in: path
+        name: configClass
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The type of configuration object to delete.
+        explode: false
+        in: path
+        name: objectType
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier of the object to delete.
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Delete a dynamic configuration object.
+      tags:
+      - asterisk
+      x-openapi-router-controller: ari_async_sdk.controllers.asterisk_controller
+    get:
+      operationId: get_object
+      parameters:
+      - description: The configuration class containing dynamic configuration objects.
+        explode: false
+        in: path
+        name: configClass
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The type of configuration object to retrieve.
+        explode: false
+        in: path
+        name: objectType
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier of the object to retrieve.
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/ConfigTuple'
+                type: array
+          description: No response was specified
+      summary: Retrieve a dynamic configuration object.
+      tags:
+      - asterisk
+      x-openapi-router-controller: ari_async_sdk.controllers.asterisk_controller
+    put:
+      operationId: update_object
+      parameters:
+      - description: The configuration class containing dynamic configuration objects.
+        explode: false
+        in: path
+        name: configClass
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The type of configuration object to create or update.
+        explode: false
+        in: path
+        name: objectType
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier of the object to create or update.
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/containers'
+        description: "The body object should have a value that is a list of ConfigTuples,\
+          \ which provide the fields to update. Ex. [ { \"attribute\": \"directmedia\"\
+          , \"value\": \"false\" } ]"
+        required: false
+        x-body-name: fields
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/ConfigTuple'
+                type: array
+          description: No response was specified
+      summary: Create or update a dynamic configuration object.
+      tags:
+      - asterisk
+      x-codegen-request-body-name: fields
+      x-openapi-router-controller: ari_async_sdk.controllers.asterisk_controller
+  /asterisk/info:
+    get:
+      operationId: get_info
+      parameters:
+      - description: Filter information returned
+        explode: false
+        in: query
+        name: only
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AsteriskInfo'
+          description: No response was specified
+      summary: Gets Asterisk system information.
+      tags:
+      - asterisk
+      x-openapi-router-controller: ari_async_sdk.controllers.asterisk_controller
+  /asterisk/logging:
+    get:
+      operationId: list_log_channels
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/LogChannel'
+                type: array
+          description: No response was specified
+      summary: Gets Asterisk log channel information.
+      tags:
+      - asterisk
+      x-openapi-router-controller: ari_async_sdk.controllers.asterisk_controller
+  /asterisk/logging/{logChannelName}:
+    delete:
+      operationId: delete_log
+      parameters:
+      - description: Log channels name
+        explode: false
+        in: path
+        name: logChannelName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Deletes a log channel.
+      tags:
+      - asterisk
+      x-openapi-router-controller: ari_async_sdk.controllers.asterisk_controller
+    post:
+      operationId: add_log
+      parameters:
+      - description: The log channel to add
+        explode: false
+        in: path
+        name: logChannelName
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: levels of the log channel
+        explode: true
+        in: query
+        name: configuration
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Adds a log channel.
+      tags:
+      - asterisk
+      x-openapi-router-controller: ari_async_sdk.controllers.asterisk_controller
+  /asterisk/logging/{logChannelName}/rotate:
+    put:
+      operationId: rotate_log
+      parameters:
+      - description: Log channel's name
+        explode: false
+        in: path
+        name: logChannelName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Rotates a log channel.
+      tags:
+      - asterisk
+      x-openapi-router-controller: ari_async_sdk.controllers.asterisk_controller
+  /asterisk/modules:
+    get:
+      operationId: list_modules
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/Module'
+                type: array
+          description: No response was specified
+      summary: List Asterisk modules.
+      tags:
+      - asterisk
+      x-openapi-router-controller: ari_async_sdk.controllers.asterisk_controller
+  /asterisk/modules/{moduleName}:
+    delete:
+      operationId: unload_module
+      parameters:
+      - description: Module's name
+        explode: false
+        in: path
+        name: moduleName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Unload an Asterisk module.
+      tags:
+      - asterisk
+      x-openapi-router-controller: ari_async_sdk.controllers.asterisk_controller
+    get:
+      operationId: get_module
+      parameters:
+      - description: Module's name
+        explode: false
+        in: path
+        name: moduleName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Module'
+          description: No response was specified
+      summary: Get Asterisk module information.
+      tags:
+      - asterisk
+      x-openapi-router-controller: ari_async_sdk.controllers.asterisk_controller
+    post:
+      operationId: load_module
+      parameters:
+      - description: Module's name
+        explode: false
+        in: path
+        name: moduleName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Load an Asterisk module.
+      tags:
+      - asterisk
+      x-openapi-router-controller: ari_async_sdk.controllers.asterisk_controller
+    put:
+      operationId: reload_module
+      parameters:
+      - description: Module's name
+        explode: false
+        in: path
+        name: moduleName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Reload an Asterisk module.
+      tags:
+      - asterisk
+      x-openapi-router-controller: ari_async_sdk.controllers.asterisk_controller
+  /asterisk/ping:
+    get:
+      operationId: ping
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AsteriskPing'
+          description: No response was specified
+      summary: Response pong message.
+      tags:
+      - asterisk
+      x-openapi-router-controller: ari_async_sdk.controllers.asterisk_controller
+  /asterisk/variable:
+    get:
+      operationId: get_global_var
+      parameters:
+      - description: The variable to get
+        explode: true
+        in: query
+        name: variable
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Variable'
+          description: No response was specified
+      summary: Get the value of a global variable.
+      tags:
+      - asterisk
+      x-openapi-router-controller: ari_async_sdk.controllers.asterisk_controller
+    post:
+      operationId: set_global_var
+      parameters:
+      - description: The variable to set
+        explode: true
+        in: query
+        name: variable
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: The value to set the variable to
+        explode: true
+        in: query
+        name: value
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Set the value of a global variable.
+      tags:
+      - asterisk
+      x-openapi-router-controller: ari_async_sdk.controllers.asterisk_controller
+  /bridges:
+    get:
+      operationId: listbridges
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/Bridge'
+                type: array
+          description: No response was specified
+      summary: List all active bridges in Asterisk.
+      tags:
+      - bridges
+      x-openapi-router-controller: ari_async_sdk.controllers.bridges_controller
+    post:
+      description: "This bridge persists until it has been shut down, or Asterisk\
+        \ has been shut down."
+      operationId: create
+      parameters:
+      - description: "Comma separated list of bridge type attributes (mixing, holding,\
+          \ dtmf_events, proxy_media, video_sfu)."
+        explode: true
+        in: query
+        name: type
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Unique ID to give to the bridge being created.
+        explode: true
+        in: query
+        name: bridgeId
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Name to give to the bridge being created.
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Bridge'
+          description: No response was specified
+      summary: Create a new bridge.
+      tags:
+      - bridges
+      x-openapi-router-controller: ari_async_sdk.controllers.bridges_controller
+  /bridges/{bridgeId}:
+    delete:
+      description: "If any channels are in this bridge, they will be removed and resume\
+        \ whatever they were doing beforehand."
+      operationId: destroy
+      parameters:
+      - description: Bridge's id
+        explode: false
+        in: path
+        name: bridgeId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Shut down a bridge.
+      tags:
+      - bridges
+      x-openapi-router-controller: ari_async_sdk.controllers.bridges_controller
+    get:
+      operationId: getbridge
+      parameters:
+      - description: Bridge's id
+        explode: false
+        in: path
+        name: bridgeId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Bridge'
+          description: No response was specified
+      summary: Get bridge details.
+      tags:
+      - bridges
+      x-openapi-router-controller: ari_async_sdk.controllers.bridges_controller
+    post:
+      description: "This bridge persists until it has been shut down, or Asterisk\
+        \ has been shut down."
+      operationId: create_with_id
+      parameters:
+      - description: "Comma separated list of bridge type attributes (mixing, holding,\
+          \ dtmf_events, proxy_media, video_sfu) to set."
+        explode: true
+        in: query
+        name: type
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Unique ID to give to the bridge being created.
+        explode: false
+        in: path
+        name: bridgeId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Set the name of the bridge.
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Bridge'
+          description: No response was specified
+      summary: Create a new bridge or updates an existing one.
+      tags:
+      - bridges
+      x-openapi-router-controller: ari_async_sdk.controllers.bridges_controller
+  /bridges/{bridgeId}/addChannel:
+    post:
+      operationId: add_channel
+      parameters:
+      - description: Bridge's id
+        explode: false
+        in: path
+        name: bridgeId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Ids of channels to add to bridge
+        explode: false
+        in: query
+        name: channel
+        required: true
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Channel's role in the bridge
+        explode: true
+        in: query
+        name: role
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: "Absorb DTMF coming from this channel, preventing it to pass\
+          \ through to the bridge"
+        explode: true
+        in: query
+        name: absorbDTMF
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      - description: "Mute audio from this channel, preventing it to pass through\
+          \ to the bridge"
+        explode: true
+        in: query
+        name: mute
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      - description: Do not present the identity of the newly connected channel to
+          other bridge members
+        explode: true
+        in: query
+        name: inhibitConnectedLineUpdates
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Add a channel to a bridge.
+      tags:
+      - bridges
+      x-openapi-router-controller: ari_async_sdk.controllers.bridges_controller
+  /bridges/{bridgeId}/moh:
+    delete:
+      description: "This will only stop music on hold being played via POST bridges/{bridgeId}/moh."
+      operationId: stop_moh
+      parameters:
+      - description: Bridge's id
+        explode: false
+        in: path
+        name: bridgeId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Stop playing music on hold to a bridge.
+      tags:
+      - bridges
+      x-openapi-router-controller: ari_async_sdk.controllers.bridges_controller
+    post:
+      operationId: start_moh
+      parameters:
+      - description: Bridge's id
+        explode: false
+        in: path
+        name: bridgeId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Channel's id
+        explode: true
+        in: query
+        name: mohClass
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Play music on hold to a bridge or change the MOH class that is playing.
+      tags:
+      - bridges
+      x-openapi-router-controller: ari_async_sdk.controllers.bridges_controller
+  /bridges/{bridgeId}/play:
+    post:
+      description: "The media URI may be any of a number of URI's. Currently sound:,\
+        \ recording:, number:, digits:, characters:, and tone: URI's are supported.\
+        \ This operation creates a playback resource that can be used to control the\
+        \ playback of media (pause, rewind, fast forward, etc.)"
+      operationId: play
+      parameters:
+      - description: Bridge's id
+        explode: false
+        in: path
+        name: bridgeId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Media URIs to play.
+        explode: false
+        in: query
+        name: media
+        required: true
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: "For sounds, selects language for sound."
+        explode: true
+        in: query
+        name: lang
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Number of milliseconds to skip before playing. Only applies to
+          the first URI if multiple media URIs are specified.
+        explode: true
+        in: query
+        name: offsetms
+        required: false
+        schema:
+          default: 0
+          format: int32
+          type: integer
+        style: form
+      - description: Number of milliseconds to skip for forward/reverse operations.
+        explode: true
+        in: query
+        name: skipms
+        required: false
+        schema:
+          default: 3000
+          format: int32
+          type: integer
+        style: form
+      - description: Playback Id.
+        explode: true
+        in: query
+        name: playbackId
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Playback'
+          description: No response was specified
+      summary: Start playback of media on a bridge.
+      tags:
+      - bridges
+      x-openapi-router-controller: ari_async_sdk.controllers.bridges_controller
+  /bridges/{bridgeId}/play/{playbackId}:
+    post:
+      description: "The media URI may be any of a number of URI's. Currently sound:,\
+        \ recording:, number:, digits:, characters:, and tone: URI's are supported.\
+        \ This operation creates a playback resource that can be used to control the\
+        \ playback of media (pause, rewind, fast forward, etc.)"
+      operationId: play_with_id
+      parameters:
+      - description: Bridge's id
+        explode: false
+        in: path
+        name: bridgeId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Playback ID.
+        explode: false
+        in: path
+        name: playbackId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Media URIs to play.
+        explode: false
+        in: query
+        name: media
+        required: true
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: "For sounds, selects language for sound."
+        explode: true
+        in: query
+        name: lang
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Number of milliseconds to skip before playing. Only applies to
+          the first URI if multiple media URIs are specified.
+        explode: true
+        in: query
+        name: offsetms
+        required: false
+        schema:
+          default: 0
+          format: int32
+          type: integer
+        style: form
+      - description: Number of milliseconds to skip for forward/reverse operations.
+        explode: true
+        in: query
+        name: skipms
+        required: false
+        schema:
+          default: 3000
+          format: int32
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Playback'
+          description: No response was specified
+      summary: Start playback of media on a bridge.
+      tags:
+      - bridges
+      x-openapi-router-controller: ari_async_sdk.controllers.bridges_controller
+  /bridges/{bridgeId}/record:
+    post:
+      description: This records the mixed audio from all channels participating in
+        this bridge.
+      operationId: record
+      parameters:
+      - description: Bridge's id
+        explode: false
+        in: path
+        name: bridgeId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Recording's filename
+        explode: true
+        in: query
+        name: name
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: Format to encode audio in
+        explode: true
+        in: query
+        name: format
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: "Maximum duration of the recording, in seconds. 0 for no limit."
+        explode: true
+        in: query
+        name: maxDurationSeconds
+        required: false
+        schema:
+          default: 0
+          format: int32
+          type: integer
+        style: form
+      - description: "Maximum duration of silence, in seconds. 0 for no limit."
+        explode: true
+        in: query
+        name: maxSilenceSeconds
+        required: false
+        schema:
+          default: 0
+          format: int32
+          type: integer
+        style: form
+      - description: Action to take if a recording with the same name already exists.
+        explode: true
+        in: query
+        name: ifExists
+        required: false
+        schema:
+          default: fail
+          type: string
+        style: form
+      - description: Play beep when recording begins
+        explode: true
+        in: query
+        name: beep
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      - description: DTMF input to terminate recording.
+        explode: true
+        in: query
+        name: terminateOn
+        required: false
+        schema:
+          default: none
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LiveRecording'
+          description: No response was specified
+      summary: Start a recording.
+      tags:
+      - bridges
+      x-openapi-router-controller: ari_async_sdk.controllers.bridges_controller
+  /bridges/{bridgeId}/removeChannel:
+    post:
+      operationId: remove_channel
+      parameters:
+      - description: Bridge's id
+        explode: false
+        in: path
+        name: bridgeId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Ids of channels to remove from bridge
+        explode: false
+        in: query
+        name: channel
+        required: true
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Remove a channel from a bridge.
+      tags:
+      - bridges
+      x-openapi-router-controller: ari_async_sdk.controllers.bridges_controller
+  /bridges/{bridgeId}/videoSource:
+    delete:
+      operationId: clear_video_source
+      parameters:
+      - description: Bridge's id
+        explode: false
+        in: path
+        name: bridgeId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: "Removes any explicit video source in a multi-party mixing bridge.\
+        \ This operation has no effect on bridges with two or fewer participants.\
+        \ When no explicit video source is set, talk detection will be used to determine\
+        \ the active video stream."
+      tags:
+      - bridges
+      x-openapi-router-controller: ari_async_sdk.controllers.bridges_controller
+  /bridges/{bridgeId}/videoSource/{channelId}:
+    post:
+      operationId: set_video_source
+      parameters:
+      - description: Bridge's id
+        explode: false
+        in: path
+        name: bridgeId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Channel's id
+        explode: false
+        in: path
+        name: channelId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Set a channel as the video source in a multi-party mixing bridge. This
+        operation has no effect on bridges with two or fewer participants.
+      tags:
+      - bridges
+      x-openapi-router-controller: ari_async_sdk.controllers.bridges_controller
+  /channels:
+    get:
+      operationId: listchannels
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/Channel'
+                type: array
+          description: No response was specified
+      summary: List all active channels in Asterisk.
+      tags:
+      - channels
+      x-openapi-router-controller: ari_async_sdk.controllers.channels_controller
+    post:
+      description: The new channel is created immediately and a snapshot of it returned.
+        If a Stasis application is provided it will be automatically subscribed to
+        the originated channel for further events and updates.
+      operationId: originate
+      parameters:
+      - description: Endpoint to call.
+        explode: true
+        in: query
+        name: endpoint
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: The extension to dial after the endpoint answers. Mutually exclusive
+          with 'app'.
+        explode: true
+        in: query
+        name: extension
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: "The context to dial after the endpoint answers. If omitted,\
+          \ uses 'default'. Mutually exclusive with 'app'."
+        explode: true
+        in: query
+        name: context
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: "The priority to dial after the endpoint answers. If omitted,\
+          \ uses 1. Mutually exclusive with 'app'."
+        explode: true
+        in: query
+        name: priority
+        required: false
+        schema:
+          format: int64
+          type: integer
+        style: form
+      - description: The label to dial after the endpoint answers. Will supersede
+          'priority' if provided. Mutually exclusive with 'app'.
+        explode: true
+        in: query
+        name: label
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: "The application that is subscribed to the originated channel.\
+          \ When the channel is answered, it will be passed to this Stasis application.\
+          \ Mutually exclusive with 'context', 'extension', 'priority', and 'label'."
+        explode: true
+        in: query
+        name: app
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: "The application arguments to pass to the Stasis application\
+          \ provided by 'app'. Mutually exclusive with 'context', 'extension', 'priority',\
+          \ and 'label'."
+        explode: true
+        in: query
+        name: appArgs
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: CallerID to use when dialing the endpoint or extension.
+        explode: true
+        in: query
+        name: callerId
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: "Timeout (in seconds) before giving up dialing, or -1 for no\
+          \ timeout."
+        explode: true
+        in: query
+        name: timeout
+        required: false
+        schema:
+          default: 30
+          format: int32
+          type: integer
+        style: form
+      - description: The unique id to assign the channel on creation.
+        explode: true
+        in: query
+        name: channelId
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The unique id to assign the second channel when using local channels.
+        explode: true
+        in: query
+        name: otherChannelId
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The unique id of the channel which is originating this one.
+        explode: true
+        in: query
+        name: originator
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: "The format name capability list to use if originator is not\
+          \ specified. Ex. \"ulaw,slin16\".  Format names can be found with \"core\
+          \ show codecs\"."
+        explode: true
+        in: query
+        name: formats
+        required: false
+        schema:
+          type: string
+        style: form
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/containers'
+        description: "The \"variables\" key in the body object holds variable key/value\
+          \ pairs to set on the channel on creation. Other keys in the body object\
+          \ are interpreted as query parameters. Ex. { \"endpoint\": \"SIP/Alice\"\
+          , \"variables\": { \"CALLERID(name)\": \"Alice\" } }"
+        required: false
+        x-body-name: variables
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Channel'
+          description: No response was specified
+      summary: Create a new channel (originate).
+      tags:
+      - channels
+      x-codegen-request-body-name: variables
+      x-openapi-router-controller: ari_async_sdk.controllers.channels_controller
+  /channels/create:
+    post:
+      operationId: createchannel
+      parameters:
+      - description: Endpoint for channel communication
+        explode: true
+        in: query
+        name: endpoint
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: Stasis Application to place channel into
+        explode: true
+        in: query
+        name: app
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: "The application arguments to pass to the Stasis application\
+          \ provided by 'app'. Mutually exclusive with 'context', 'extension', 'priority',\
+          \ and 'label'."
+        explode: true
+        in: query
+        name: appArgs
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The unique id to assign the channel on creation.
+        explode: true
+        in: query
+        name: channelId
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The unique id to assign the second channel when using local channels.
+        explode: true
+        in: query
+        name: otherChannelId
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Unique ID of the calling channel
+        explode: true
+        in: query
+        name: originator
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: "The format name capability list to use if originator is not\
+          \ specified. Ex. \"ulaw,slin16\".  Format names can be found with \"core\
+          \ show codecs\"."
+        explode: true
+        in: query
+        name: formats
+        required: false
+        schema:
+          type: string
+        style: form
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/containers'
+        description: "The \"variables\" key in the body object holds variable key/value\
+          \ pairs to set on the channel on creation. Other keys in the body object\
+          \ are interpreted as query parameters. Ex. { \"endpoint\": \"SIP/Alice\"\
+          , \"variables\": { \"CALLERID(name)\": \"Alice\" } }"
+        required: false
+        x-body-name: variables
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Channel'
+          description: No response was specified
+      summary: Create channel.
+      tags:
+      - channels
+      x-codegen-request-body-name: variables
+      x-openapi-router-controller: ari_async_sdk.controllers.channels_controller
+  /channels/externalMedia:
+    post:
+      description: Create a channel to an External Media source/sink.
+      operationId: external_media
+      parameters:
+      - description: The unique id to assign the channel on creation.
+        explode: true
+        in: query
+        name: channelId
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Stasis Application to place channel into
+        explode: true
+        in: query
+        name: app
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: Hostname/ip:port of external host
+        explode: true
+        in: query
+        name: external_host
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: Payload encapsulation protocol
+        explode: true
+        in: query
+        name: encapsulation
+        required: false
+        schema:
+          default: rtp
+          type: string
+        style: form
+      - description: Transport protocol
+        explode: true
+        in: query
+        name: transport
+        required: false
+        schema:
+          default: udp
+          type: string
+        style: form
+      - description: Connection type (client/server)
+        explode: true
+        in: query
+        name: connection_type
+        required: false
+        schema:
+          default: client
+          type: string
+        style: form
+      - description: Format to encode audio in
+        explode: true
+        in: query
+        name: format
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: External media direction
+        explode: true
+        in: query
+        name: direction
+        required: false
+        schema:
+          default: both
+          type: string
+        style: form
+      - description: An arbitrary data field
+        explode: true
+        in: query
+        name: data
+        required: false
+        schema:
+          type: string
+        style: form
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/containers'
+        description: "The \"variables\" key in the body object holds variable key/value\
+          \ pairs to set on the channel on creation. Other keys in the body object\
+          \ are interpreted as query parameters. Ex. { \"endpoint\": \"SIP/Alice\"\
+          , \"variables\": { \"CALLERID(name)\": \"Alice\" } }"
+        required: false
+        x-body-name: variables
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Channel'
+          description: No response was specified
+      summary: Start an External Media session.
+      tags:
+      - channels
+      x-codegen-request-body-name: variables
+      x-openapi-router-controller: ari_async_sdk.controllers.channels_controller
+  /channels/{channelId}:
+    delete:
+      operationId: hangup
+      parameters:
+      - description: Channel's id
+        explode: false
+        in: path
+        name: channelId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The reason code for hanging up the channel for detail use. Mutually
+          exclusive with 'reason'. See detail hangup codes at here. https://wiki.asterisk.org/wiki/display/AST/Hangup+Cause+Mappings
+        explode: true
+        in: query
+        name: reason_code
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Reason for hanging up the channel for simple use. Mutually exclusive
+          with 'reason_code'.
+        explode: true
+        in: query
+        name: reason
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Delete (i.e. hangup) a channel.
+      tags:
+      - channels
+      x-openapi-router-controller: ari_async_sdk.controllers.channels_controller
+    get:
+      operationId: getchannel
+      parameters:
+      - description: Channel's id
+        explode: false
+        in: path
+        name: channelId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Channel'
+          description: No response was specified
+      summary: Channel details.
+      tags:
+      - channels
+      x-openapi-router-controller: ari_async_sdk.controllers.channels_controller
+    post:
+      description: The new channel is created immediately and a snapshot of it returned.
+        If a Stasis application is provided it will be automatically subscribed to
+        the originated channel for further events and updates.
+      operationId: originate_with_id
+      parameters:
+      - description: The unique id to assign the channel on creation.
+        explode: false
+        in: path
+        name: channelId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Endpoint to call.
+        explode: true
+        in: query
+        name: endpoint
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: The extension to dial after the endpoint answers. Mutually exclusive
+          with 'app'.
+        explode: true
+        in: query
+        name: extension
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: "The context to dial after the endpoint answers. If omitted,\
+          \ uses 'default'. Mutually exclusive with 'app'."
+        explode: true
+        in: query
+        name: context
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: "The priority to dial after the endpoint answers. If omitted,\
+          \ uses 1. Mutually exclusive with 'app'."
+        explode: true
+        in: query
+        name: priority
+        required: false
+        schema:
+          format: int64
+          type: integer
+        style: form
+      - description: The label to dial after the endpoint answers. Will supersede
+          'priority' if provided. Mutually exclusive with 'app'.
+        explode: true
+        in: query
+        name: label
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: "The application that is subscribed to the originated channel.\
+          \ When the channel is answered, it will be passed to this Stasis application.\
+          \ Mutually exclusive with 'context', 'extension', 'priority', and 'label'."
+        explode: true
+        in: query
+        name: app
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: "The application arguments to pass to the Stasis application\
+          \ provided by 'app'. Mutually exclusive with 'context', 'extension', 'priority',\
+          \ and 'label'."
+        explode: true
+        in: query
+        name: appArgs
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: CallerID to use when dialing the endpoint or extension.
+        explode: true
+        in: query
+        name: callerId
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: "Timeout (in seconds) before giving up dialing, or -1 for no\
+          \ timeout."
+        explode: true
+        in: query
+        name: timeout
+        required: false
+        schema:
+          default: 30
+          format: int32
+          type: integer
+        style: form
+      - description: The unique id to assign the second channel when using local channels.
+        explode: true
+        in: query
+        name: otherChannelId
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The unique id of the channel which is originating this one.
+        explode: true
+        in: query
+        name: originator
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: "The format name capability list to use if originator is not\
+          \ specified. Ex. \"ulaw,slin16\".  Format names can be found with \"core\
+          \ show codecs\"."
+        explode: true
+        in: query
+        name: formats
+        required: false
+        schema:
+          type: string
+        style: form
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/containers'
+        description: "The \"variables\" key in the body object holds variable key/value\
+          \ pairs to set on the channel on creation. Other keys in the body object\
+          \ are interpreted as query parameters. Ex. { \"endpoint\": \"SIP/Alice\"\
+          , \"variables\": { \"CALLERID(name)\": \"Alice\" } }"
+        required: false
+        x-body-name: variables
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Channel'
+          description: No response was specified
+      summary: Create a new channel (originate with id).
+      tags:
+      - channels
+      x-codegen-request-body-name: variables
+      x-openapi-router-controller: ari_async_sdk.controllers.channels_controller
+  /channels/{channelId}/answer:
+    post:
+      operationId: answer
+      parameters:
+      - description: Channel's id
+        explode: false
+        in: path
+        name: channelId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Answer a channel.
+      tags:
+      - channels
+      x-openapi-router-controller: ari_async_sdk.controllers.channels_controller
+  /channels/{channelId}/continue:
+    post:
+      operationId: continue_in_dialplan
+      parameters:
+      - description: Channel's id
+        explode: false
+        in: path
+        name: channelId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The context to continue to.
+        explode: true
+        in: query
+        name: context
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The extension to continue to.
+        explode: true
+        in: query
+        name: extension
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The priority to continue to.
+        explode: true
+        in: query
+        name: priority
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: The label to continue to - will supersede 'priority' if both
+          are provided.
+        explode: true
+        in: query
+        name: label
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Exit application; continue execution in the dialplan.
+      tags:
+      - channels
+      x-openapi-router-controller: ari_async_sdk.controllers.channels_controller
+  /channels/{channelId}/dial:
+    post:
+      operationId: dial
+      parameters:
+      - description: Channel's id
+        explode: false
+        in: path
+        name: channelId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Channel ID of caller
+        explode: true
+        in: query
+        name: caller
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Dial timeout
+        explode: true
+        in: query
+        name: timeout
+        required: false
+        schema:
+          default: 0
+          format: int32
+          type: integer
+        style: form
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Dial a created channel.
+      tags:
+      - channels
+      x-openapi-router-controller: ari_async_sdk.controllers.channels_controller
+  /channels/{channelId}/dtmf:
+    post:
+      operationId: send_dtmf
+      parameters:
+      - description: Channel's id
+        explode: false
+        in: path
+        name: channelId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: DTMF To send.
+        explode: true
+        in: query
+        name: dtmf
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Amount of time to wait before DTMF digits (specified in milliseconds)
+          start.
+        explode: true
+        in: query
+        name: before
+        required: false
+        schema:
+          default: 0
+          format: int32
+          type: integer
+        style: form
+      - description: Amount of time in between DTMF digits (specified in milliseconds).
+        explode: true
+        in: query
+        name: between
+        required: false
+        schema:
+          default: 100
+          format: int32
+          type: integer
+        style: form
+      - description: Length of each DTMF digit (specified in milliseconds).
+        explode: true
+        in: query
+        name: duration
+        required: false
+        schema:
+          default: 100
+          format: int32
+          type: integer
+        style: form
+      - description: Amount of time to wait after DTMF digits (specified in milliseconds)
+          end.
+        explode: true
+        in: query
+        name: after
+        required: false
+        schema:
+          default: 0
+          format: int32
+          type: integer
+        style: form
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Send provided DTMF to a given channel.
+      tags:
+      - channels
+      x-openapi-router-controller: ari_async_sdk.controllers.channels_controller
+  /channels/{channelId}/hold:
+    delete:
+      operationId: unhold
+      parameters:
+      - description: Channel's id
+        explode: false
+        in: path
+        name: channelId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Remove a channel from hold.
+      tags:
+      - channels
+      x-openapi-router-controller: ari_async_sdk.controllers.channels_controller
+    post:
+      operationId: hold
+      parameters:
+      - description: Channel's id
+        explode: false
+        in: path
+        name: channelId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Hold a channel.
+      tags:
+      - channels
+      x-openapi-router-controller: ari_async_sdk.controllers.channels_controller
+  /channels/{channelId}/moh:
+    delete:
+      operationId: deletemoh
+      parameters:
+      - description: Channel's id
+        explode: false
+        in: path
+        name: channelId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Stop playing music on hold to a channel.
+      tags:
+      - channels
+      x-openapi-router-controller: ari_async_sdk.controllers.channels_controller
+    post:
+      description: "Using media operations such as /play on a channel playing MOH\
+        \ in this manner will suspend MOH without resuming automatically. If continuing\
+        \ music on hold is desired, the stasis application must reinitiate music on\
+        \ hold."
+      operationId: add_moh
+      parameters:
+      - description: Channel's id
+        explode: false
+        in: path
+        name: channelId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Music on hold class to use
+        explode: true
+        in: query
+        name: mohClass
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Play music on hold to a channel.
+      tags:
+      - channels
+      x-openapi-router-controller: ari_async_sdk.controllers.channels_controller
+  /channels/{channelId}/move:
+    post:
+      operationId: move
+      parameters:
+      - description: Channel's id
+        explode: false
+        in: path
+        name: channelId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The channel will be passed to this Stasis application.
+        explode: true
+        in: query
+        name: app
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: The application arguments to pass to the Stasis application provided
+          by 'app'.
+        explode: true
+        in: query
+        name: appArgs
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Move the channel from one Stasis application to another.
+      tags:
+      - channels
+      x-openapi-router-controller: ari_async_sdk.controllers.channels_controller
+  /channels/{channelId}/mute:
+    delete:
+      operationId: unmute
+      parameters:
+      - description: Channel's id
+        explode: false
+        in: path
+        name: channelId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Direction in which to unmute audio
+        explode: true
+        in: query
+        name: direction
+        required: false
+        schema:
+          default: both
+          type: string
+        style: form
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Unmute a channel.
+      tags:
+      - channels
+      x-openapi-router-controller: ari_async_sdk.controllers.channels_controller
+    post:
+      operationId: mute
+      parameters:
+      - description: Channel's id
+        explode: false
+        in: path
+        name: channelId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Direction in which to mute audio
+        explode: true
+        in: query
+        name: direction
+        required: false
+        schema:
+          default: both
+          type: string
+        style: form
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Mute a channel.
+      tags:
+      - channels
+      x-openapi-router-controller: ari_async_sdk.controllers.channels_controller
+  /channels/{channelId}/play:
+    post:
+      description: "The media URI may be any of a number of URI's. Currently sound:,\
+        \ recording:, number:, digits:, characters:, and tone: URI's are supported.\
+        \ This operation creates a playback resource that can be used to control the\
+        \ playback of media (pause, rewind, fast forward, etc.)"
+      operationId: playsound
+      parameters:
+      - description: Channel's id
+        explode: false
+        in: path
+        name: channelId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Media URIs to play.
+        explode: false
+        in: query
+        name: media
+        required: true
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: "For sounds, selects language for sound."
+        explode: true
+        in: query
+        name: lang
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Number of milliseconds to skip before playing. Only applies to
+          the first URI if multiple media URIs are specified.
+        explode: true
+        in: query
+        name: offsetms
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Number of milliseconds to skip for forward/reverse operations.
+        explode: true
+        in: query
+        name: skipms
+        required: false
+        schema:
+          default: 3000
+          format: int32
+          type: integer
+        style: form
+      - description: Playback ID.
+        explode: true
+        in: query
+        name: playbackId
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Playback'
+          description: No response was specified
+      summary: Start playback of media.
+      tags:
+      - channels
+      x-openapi-router-controller: ari_async_sdk.controllers.channels_controller
+  /channels/{channelId}/play/{playbackId}:
+    post:
+      description: "The media URI may be any of a number of URI's. Currently sound:,\
+        \ recording:, number:, digits:, characters:, and tone: URI's are supported.\
+        \ This operation creates a playback resource that can be used to control the\
+        \ playback of media (pause, rewind, fast forward, etc.)"
+      operationId: play_sound_with_id
+      parameters:
+      - description: Channel's id
+        explode: false
+        in: path
+        name: channelId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Playback ID.
+        explode: false
+        in: path
+        name: playbackId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Media URIs to play.
+        explode: false
+        in: query
+        name: media
+        required: true
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: "For sounds, selects language for sound."
+        explode: true
+        in: query
+        name: lang
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Number of milliseconds to skip before playing. Only applies to
+          the first URI if multiple media URIs are specified.
+        explode: true
+        in: query
+        name: offsetms
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Number of milliseconds to skip for forward/reverse operations.
+        explode: true
+        in: query
+        name: skipms
+        required: false
+        schema:
+          default: 3000
+          format: int32
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Playback'
+          description: No response was specified
+      summary: Start playback of media and specify the playbackId.
+      tags:
+      - channels
+      x-openapi-router-controller: ari_async_sdk.controllers.channels_controller
+  /channels/{channelId}/record:
+    post:
+      description: Record audio from a channel. Note that this will not capture audio
+        sent to the channel. The bridge itself has a record feature if that's what
+        you want.
+      operationId: recordchannel
+      parameters:
+      - description: Channel's id
+        explode: false
+        in: path
+        name: channelId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Recording's filename
+        explode: true
+        in: query
+        name: name
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: Format to encode audio in
+        explode: true
+        in: query
+        name: format
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: "Maximum duration of the recording, in seconds. 0 for no limit"
+        explode: true
+        in: query
+        name: maxDurationSeconds
+        required: false
+        schema:
+          default: 0
+          format: int32
+          type: integer
+        style: form
+      - description: "Maximum duration of silence, in seconds. 0 for no limit"
+        explode: true
+        in: query
+        name: maxSilenceSeconds
+        required: false
+        schema:
+          default: 0
+          format: int32
+          type: integer
+        style: form
+      - description: Action to take if a recording with the same name already exists.
+        explode: true
+        in: query
+        name: ifExists
+        required: false
+        schema:
+          default: fail
+          type: string
+        style: form
+      - description: Play beep when recording begins
+        explode: true
+        in: query
+        name: beep
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      - description: DTMF input to terminate recording
+        explode: true
+        in: query
+        name: terminateOn
+        required: false
+        schema:
+          default: none
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LiveRecording'
+          description: No response was specified
+      summary: Start a recording.
+      tags:
+      - channels
+      x-openapi-router-controller: ari_async_sdk.controllers.channels_controller
+  /channels/{channelId}/redirect:
+    post:
+      operationId: redirect
+      parameters:
+      - description: Channel's id
+        explode: false
+        in: path
+        name: channelId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The endpoint to redirect the channel to
+        explode: true
+        in: query
+        name: endpoint
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Redirect the channel to a different location.
+      tags:
+      - channels
+      x-openapi-router-controller: ari_async_sdk.controllers.channels_controller
+  /channels/{channelId}/ring:
+    delete:
+      operationId: ring_stop
+      parameters:
+      - description: Channel's id
+        explode: false
+        in: path
+        name: channelId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Stop ringing indication on a channel if locally generated.
+      tags:
+      - channels
+      x-openapi-router-controller: ari_async_sdk.controllers.channels_controller
+    post:
+      operationId: ring
+      parameters:
+      - description: Channel's id
+        explode: false
+        in: path
+        name: channelId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Indicate ringing to a channel.
+      tags:
+      - channels
+      x-openapi-router-controller: ari_async_sdk.controllers.channels_controller
+  /channels/{channelId}/rtp_statistics:
+    get:
+      operationId: rtpstatistics
+      parameters:
+      - description: Channel's id
+        explode: false
+        in: path
+        name: channelId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RTPstat'
+          description: No response was specified
+      summary: RTP stats on a channel.
+      tags:
+      - channels
+      x-openapi-router-controller: ari_async_sdk.controllers.channels_controller
+  /channels/{channelId}/silence:
+    delete:
+      operationId: stop_silence
+      parameters:
+      - description: Channel's id
+        explode: false
+        in: path
+        name: channelId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Stop playing silence to a channel.
+      tags:
+      - channels
+      x-openapi-router-controller: ari_async_sdk.controllers.channels_controller
+    post:
+      description: Using media operations such as /play on a channel playing silence
+        in this manner will suspend silence without resuming automatically.
+      operationId: start_silence
+      parameters:
+      - description: Channel's id
+        explode: false
+        in: path
+        name: channelId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Play silence to a channel.
+      tags:
+      - channels
+      x-openapi-router-controller: ari_async_sdk.controllers.channels_controller
+  /channels/{channelId}/snoop:
+    post:
+      description: Snoop (spy/whisper) on a specific channel.
+      operationId: snoop_channel
+      parameters:
+      - description: Channel's id
+        explode: false
+        in: path
+        name: channelId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Direction of audio to spy on
+        explode: true
+        in: query
+        name: spy
+        required: false
+        schema:
+          default: none
+          type: string
+        style: form
+      - description: Direction of audio to whisper into
+        explode: true
+        in: query
+        name: whisper
+        required: false
+        schema:
+          default: none
+          type: string
+        style: form
+      - description: Application the snooping channel is placed into
+        explode: true
+        in: query
+        name: app
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: The application arguments to pass to the Stasis application
+        explode: true
+        in: query
+        name: appArgs
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Unique ID to assign to snooping channel
+        explode: true
+        in: query
+        name: snoopId
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Channel'
+          description: No response was specified
+      summary: Start snooping.
+      tags:
+      - channels
+      x-openapi-router-controller: ari_async_sdk.controllers.channels_controller
+  /channels/{channelId}/snoop/{snoopId}:
+    post:
+      description: Snoop (spy/whisper) on a specific channel.
+      operationId: snoop_channel_with_id
+      parameters:
+      - description: Channel's id
+        explode: false
+        in: path
+        name: channelId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Unique ID to assign to snooping channel
+        explode: false
+        in: path
+        name: snoopId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Direction of audio to spy on
+        explode: true
+        in: query
+        name: spy
+        required: false
+        schema:
+          default: none
+          type: string
+        style: form
+      - description: Direction of audio to whisper into
+        explode: true
+        in: query
+        name: whisper
+        required: false
+        schema:
+          default: none
+          type: string
+        style: form
+      - description: Application the snooping channel is placed into
+        explode: true
+        in: query
+        name: app
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: The application arguments to pass to the Stasis application
+        explode: true
+        in: query
+        name: appArgs
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Channel'
+          description: No response was specified
+      summary: Start snooping.
+      tags:
+      - channels
+      x-openapi-router-controller: ari_async_sdk.controllers.channels_controller
+  /channels/{channelId}/variable:
+    get:
+      operationId: get_channel_var
+      parameters:
+      - description: Channel's id
+        explode: false
+        in: path
+        name: channelId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The channel variable or function to get
+        explode: true
+        in: query
+        name: variable
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Variable'
+          description: No response was specified
+      summary: Get the value of a channel variable or function.
+      tags:
+      - channels
+      x-openapi-router-controller: ari_async_sdk.controllers.channels_controller
+    post:
+      operationId: set_channel_var
+      parameters:
+      - description: Channel's id
+        explode: false
+        in: path
+        name: channelId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The channel variable or function to set
+        explode: true
+        in: query
+        name: variable
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: The value to set the variable to
+        explode: true
+        in: query
+        name: value
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Set the value of a channel variable or function.
+      tags:
+      - channels
+      x-openapi-router-controller: ari_async_sdk.controllers.channels_controller
+  /deviceStates:
+    get:
+      operationId: list_device_states
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/DeviceState'
+                type: array
+          description: No response was specified
+      summary: List all ARI controlled device states.
+      tags:
+      - deviceStates
+      x-openapi-router-controller: ari_async_sdk.controllers.device_states_controller
+  /deviceStates/{deviceName}:
+    delete:
+      operationId: delete
+      parameters:
+      - description: Name of the device
+        explode: false
+        in: path
+        name: deviceName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Destroy a device-state controlled by ARI.
+      tags:
+      - deviceStates
+      x-openapi-router-controller: ari_async_sdk.controllers.device_states_controller
+    get:
+      operationId: getdevicestate
+      parameters:
+      - description: Name of the device
+        explode: false
+        in: path
+        name: deviceName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DeviceState'
+          description: No response was specified
+      summary: Retrieve the current state of a device.
+      tags:
+      - deviceStates
+      x-openapi-router-controller: ari_async_sdk.controllers.device_states_controller
+    put:
+      operationId: update
+      parameters:
+      - description: Name of the device
+        explode: false
+        in: path
+        name: deviceName
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Device state value
+        explode: true
+        in: query
+        name: deviceState
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Change the state of a device controlled by ARI. (Note - implicitly
+        creates the device state).
+      tags:
+      - deviceStates
+      x-openapi-router-controller: ari_async_sdk.controllers.device_states_controller
+  /endpoints:
+    get:
+      operationId: listendpoints
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/Endpoint'
+                type: array
+          description: No response was specified
+      summary: List all endpoints.
+      tags:
+      - endpoints
+      x-openapi-router-controller: ari_async_sdk.controllers.endpoints_controller
+  /endpoints/sendMessage:
+    put:
+      operationId: send_message
+      parameters:
+      - description: "The endpoint resource or technology specific URI to send the\
+          \ message to. Valid resources are sip, pjsip, and xmpp."
+        explode: true
+        in: query
+        name: to
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: "The endpoint resource or technology specific identity to send\
+          \ this message from. Valid resources are sip, pjsip, and xmpp."
+        explode: true
+        in: query
+        name: from
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: The body of the message
+        explode: true
+        in: query
+        name: body
+        required: false
+        schema:
+          type: string
+        style: form
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/containers'
+        required: false
+        x-body-name: variables
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Send a message to some technology URI or endpoint.
+      tags:
+      - endpoints
+      x-codegen-request-body-name: variables
+      x-openapi-router-controller: ari_async_sdk.controllers.endpoints_controller
+  /endpoints/{tech}:
+    get:
+      operationId: list_by_tech
+      parameters:
+      - description: "Technology of the endpoints (sip,iax2,...)"
+        explode: false
+        in: path
+        name: tech
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/Endpoint'
+                type: array
+          description: No response was specified
+      summary: List available endoints for a given endpoint technology.
+      tags:
+      - endpoints
+      x-openapi-router-controller: ari_async_sdk.controllers.endpoints_controller
+  /endpoints/{tech}/{resource}:
+    get:
+      operationId: getendpoint
+      parameters:
+      - description: Technology of the endpoint
+        explode: false
+        in: path
+        name: tech
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: ID of the endpoint
+        explode: false
+        in: path
+        name: resource
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Endpoint'
+          description: No response was specified
+      summary: Details for an endpoint.
+      tags:
+      - endpoints
+      x-openapi-router-controller: ari_async_sdk.controllers.endpoints_controller
+  /endpoints/{tech}/{resource}/sendMessage:
+    put:
+      operationId: send_message_to_endpoint
+      parameters:
+      - description: Technology of the endpoint
+        explode: false
+        in: path
+        name: tech
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: ID of the endpoint
+        explode: false
+        in: path
+        name: resource
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: "The endpoint resource or technology specific identity to send\
+          \ this message from. Valid resources are sip, pjsip, and xmpp."
+        explode: true
+        in: query
+        name: from
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: The body of the message
+        explode: true
+        in: query
+        name: body
+        required: false
+        schema:
+          type: string
+        style: form
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/containers'
+        required: false
+        x-body-name: variables
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Send a message to some endpoint in a technology.
+      tags:
+      - endpoints
+      x-codegen-request-body-name: variables
+      x-openapi-router-controller: ari_async_sdk.controllers.endpoints_controller
+  /events:
+    get:
+      operationId: event_websocket
+      parameters:
+      - description: Applications to subscribe to.
+        explode: false
+        in: query
+        name: app
+        required: true
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: "Subscribe to all Asterisk events. If provided, the applications\
+          \ listed will be subscribed to all events, effectively disabling the application\
+          \ specific subscriptions. Default is 'false'."
+        explode: true
+        in: query
+        name: subscribeAll
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Message'
+          description: No response was specified
+      summary: WebSocket connection for events.
+      tags:
+      - events
+      x-openapi-router-controller: ari_async_sdk.controllers.events_controller
+  /events/user/{eventName}:
+    post:
+      operationId: user_event
+      parameters:
+      - description: Event name
+        explode: false
+        in: path
+        name: eventName
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The name of the application that will receive this event
+        explode: true
+        in: query
+        name: application
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: "URI for event source (channel:{channelId}, bridge:{bridgeId},\
+          \ endpoint:{tech}/{resource}, deviceState:{deviceName}"
+        explode: false
+        in: query
+        name: source
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/containers'
+        description: "The \"variables\" key in the body object holds custom key/value\
+          \ pairs to add to the user event. Ex. { \"variables\": { \"key\": \"value\"\
+          \ } }"
+        required: false
+        x-body-name: variables
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Generate a user event.
+      tags:
+      - events
+      x-codegen-request-body-name: variables
+      x-openapi-router-controller: ari_async_sdk.controllers.events_controller
+  /mailboxes:
+    get:
+      operationId: listmailboxes
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/Mailbox'
+                type: array
+          description: No response was specified
+      summary: List all mailboxes.
+      tags:
+      - mailboxes
+      x-openapi-router-controller: ari_async_sdk.controllers.mailboxes_controller
+  /mailboxes/{mailboxName}:
+    delete:
+      operationId: deletemailbox
+      parameters:
+      - description: Name of the mailbox
+        explode: false
+        in: path
+        name: mailboxName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Destroy a mailbox.
+      tags:
+      - mailboxes
+      x-openapi-router-controller: ari_async_sdk.controllers.mailboxes_controller
+    get:
+      operationId: getmailbox
+      parameters:
+      - description: Name of the mailbox
+        explode: false
+        in: path
+        name: mailboxName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Mailbox'
+          description: No response was specified
+      summary: Retrieve the current state of a mailbox.
+      tags:
+      - mailboxes
+      x-openapi-router-controller: ari_async_sdk.controllers.mailboxes_controller
+    put:
+      operationId: updatemailbox
+      parameters:
+      - description: Name of the mailbox
+        explode: false
+        in: path
+        name: mailboxName
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Count of old messages in the mailbox
+        explode: true
+        in: query
+        name: oldMessages
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Count of new messages in the mailbox
+        explode: true
+        in: query
+        name: newMessages
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Change the state of a mailbox. (Note - implicitly creates the mailbox).
+      tags:
+      - mailboxes
+      x-openapi-router-controller: ari_async_sdk.controllers.mailboxes_controller
+  /playbacks/{playbackId}:
+    delete:
+      operationId: stop
+      parameters:
+      - description: Playback's id
+        explode: false
+        in: path
+        name: playbackId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Stop a playback.
+      tags:
+      - playbacks
+      x-openapi-router-controller: ari_async_sdk.controllers.playbacks_controller
+    get:
+      operationId: getplayback
+      parameters:
+      - description: Playback's id
+        explode: false
+        in: path
+        name: playbackId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Playback'
+          description: No response was specified
+      summary: Get a playback's details.
+      tags:
+      - playbacks
+      x-openapi-router-controller: ari_async_sdk.controllers.playbacks_controller
+  /playbacks/{playbackId}/control:
+    post:
+      operationId: control
+      parameters:
+      - description: Playback's id
+        explode: false
+        in: path
+        name: playbackId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Operation to perform on the playback.
+        explode: true
+        in: query
+        name: operation
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Control a playback.
+      tags:
+      - playbacks
+      x-openapi-router-controller: ari_async_sdk.controllers.playbacks_controller
+  /recordings/live/{recordingName}:
+    delete:
+      operationId: cancel
+      parameters:
+      - description: The name of the recording
+        explode: false
+        in: path
+        name: recordingName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Stop a live recording and discard it.
+      tags:
+      - recordings
+      x-openapi-router-controller: ari_async_sdk.controllers.recordings_controller
+    get:
+      operationId: get_live
+      parameters:
+      - description: The name of the recording
+        explode: false
+        in: path
+        name: recordingName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LiveRecording'
+          description: No response was specified
+      summary: List live recordings.
+      tags:
+      - recordings
+      x-openapi-router-controller: ari_async_sdk.controllers.recordings_controller
+  /recordings/live/{recordingName}/mute:
+    delete:
+      operationId: unmuterecording
+      parameters:
+      - description: The name of the recording
+        explode: false
+        in: path
+        name: recordingName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Unmute a live recording.
+      tags:
+      - recordings
+      x-openapi-router-controller: ari_async_sdk.controllers.recordings_controller
+    post:
+      description: "Muting a recording suspends silence detection, which will be restarted\
+        \ when the recording is unmuted."
+      operationId: muterecording
+      parameters:
+      - description: The name of the recording
+        explode: false
+        in: path
+        name: recordingName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Mute a live recording.
+      tags:
+      - recordings
+      x-openapi-router-controller: ari_async_sdk.controllers.recordings_controller
+  /recordings/live/{recordingName}/pause:
+    delete:
+      operationId: unpause
+      parameters:
+      - description: The name of the recording
+        explode: false
+        in: path
+        name: recordingName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Unpause a live recording.
+      tags:
+      - recordings
+      x-openapi-router-controller: ari_async_sdk.controllers.recordings_controller
+    post:
+      description: "Pausing a recording suspends silence detection, which will be\
+        \ restarted when the recording is unpaused. Paused time is not included in\
+        \ the accounting for maxDurationSeconds."
+      operationId: pause
+      parameters:
+      - description: The name of the recording
+        explode: false
+        in: path
+        name: recordingName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Pause a live recording.
+      tags:
+      - recordings
+      x-openapi-router-controller: ari_async_sdk.controllers.recordings_controller
+  /recordings/live/{recordingName}/stop:
+    post:
+      operationId: stoprecording
+      parameters:
+      - description: The name of the recording
+        explode: false
+        in: path
+        name: recordingName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Stop a live recording and store it.
+      tags:
+      - recordings
+      x-openapi-router-controller: ari_async_sdk.controllers.recordings_controller
+  /recordings/stored:
+    get:
+      operationId: list_stored
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/StoredRecording'
+                type: array
+          description: No response was specified
+      summary: List recordings that are complete.
+      tags:
+      - recordings
+      x-openapi-router-controller: ari_async_sdk.controllers.recordings_controller
+  /recordings/stored/{recordingName}:
+    delete:
+      operationId: delete_stored
+      parameters:
+      - description: The name of the recording
+        explode: false
+        in: path
+        name: recordingName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content: {}
+          description: No response was specified
+      summary: Delete a stored recording.
+      tags:
+      - recordings
+      x-openapi-router-controller: ari_async_sdk.controllers.recordings_controller
+    get:
+      operationId: get_stored
+      parameters:
+      - description: The name of the recording
+        explode: false
+        in: path
+        name: recordingName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/StoredRecording'
+          description: No response was specified
+      summary: Get a stored recording's details.
+      tags:
+      - recordings
+      x-openapi-router-controller: ari_async_sdk.controllers.recordings_controller
+  /recordings/stored/{recordingName}/copy:
+    post:
+      operationId: copy_stored
+      parameters:
+      - description: The name of the recording to copy
+        explode: false
+        in: path
+        name: recordingName
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The destination name of the recording
+        explode: true
+        in: query
+        name: destinationRecordingName
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/StoredRecording'
+          description: No response was specified
+      summary: Copy a stored recording.
+      tags:
+      - recordings
+      x-openapi-router-controller: ari_async_sdk.controllers.recordings_controller
+  /recordings/stored/{recordingName}/file:
+    get:
+      operationId: get_stored_file
+      parameters:
+      - description: The name of the recording
+        explode: false
+        in: path
+        name: recordingName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/binary'
+          description: No response was specified
+      summary: Get the file associated with the stored recording.
+      tags:
+      - recordings
+      x-openapi-router-controller: ari_async_sdk.controllers.recordings_controller
+  /sounds:
+    get:
+      operationId: listsounds
+      parameters:
+      - description: Lookup sound for a specific language.
+        explode: true
+        in: query
+        name: lang
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Lookup sound in a specific format.
+        explode: true
+        in: query
+        name: format
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/Sound'
+                type: array
+          description: No response was specified
+      summary: List all sounds.
+      tags:
+      - sounds
+      x-openapi-router-controller: ari_async_sdk.controllers.sounds_controller
+  /sounds/{soundId}:
+    get:
+      operationId: getsound
+      parameters:
+      - description: Sound's id
+        explode: false
+        in: path
+        name: soundId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Sound'
+          description: No response was specified
+      summary: Get a sound's details.
+      tags:
+      - sounds
+      x-openapi-router-controller: ari_async_sdk.controllers.sounds_controller
+components:
+  schemas:
+    containers:
+      description: Container
+      type: object
+    binary:
+      description: Binary
+      type: object
+    Application:
+      description: Details of a Stasis application
+      example:
+        channel_ids:
+        - channel_ids
+        - channel_ids
+        events_allowed:
+        - "{}"
+        - "{}"
+        bridge_ids:
+        - bridge_ids
+        - bridge_ids
+        device_names:
+        - device_names
+        - device_names
+        name: name
+        endpoint_ids:
+        - endpoint_ids
+        - endpoint_ids
+        events_disallowed:
+        - "{}"
+        - "{}"
+      properties:
+        bridge_ids:
+          description: Id's for bridges subscribed to.
+          items:
+            type: string
+          title: bridge_ids
+          type: array
+        channel_ids:
+          description: Id's for channels subscribed to.
+          items:
+            type: string
+          title: channel_ids
+          type: array
+        device_names:
+          description: Names of the devices subscribed to.
+          items:
+            type: string
+          title: device_names
+          type: array
+        endpoint_ids:
+          description: "{tech}/{resource} for endpoints subscribed to."
+          items:
+            type: string
+          title: endpoint_ids
+          type: array
+        events_allowed:
+          description: Event types sent to the application.
+          items:
+            properties: {}
+            type: object
+          title: events_allowed
+          type: array
+        events_disallowed:
+          description: Event types not sent to the application.
+          items:
+            properties: {}
+            type: object
+          title: events_disallowed
+          type: array
+        name:
+          description: Name of this application
+          title: name
+          type: string
+      required:
+      - bridge_ids
+      - channel_ids
+      - device_names
+      - endpoint_ids
+      - events_allowed
+      - events_disallowed
+      - name
+      title: Application
+      type: object
+    ApplicationMoveFailed:
+      allOf:
+      - description: Notification that trying to move a channel to another Stasis
+          application failed.
+        properties:
+          args:
+            description: Arguments to the application
+            items:
+              type: string
+            type: array
+          channel:
+            $ref: '#/components/schemas/Channel'
+          destination:
+            type: string
+        required:
+        - args
+        - channel
+        - destination
+        type: object
+      - $ref: '#/components/schemas/Event'
+    ApplicationReplaced:
+      allOf:
+      - description: |-
+          Notification that another WebSocket has taken over for an application.
+
+          An application may only be subscribed to by a single WebSocket at a time. If multiple WebSockets attempt to subscribe to the same application, the newer WebSocket wins, and the older one receives this event.
+        type: object
+      - $ref: '#/components/schemas/Event'
+    AsteriskInfo:
+      description: Asterisk system information
+      example:
+        system:
+          entity_id: entity_id
+          version: version
+        build:
+          date: date
+          os: os
+          kernel: kernel
+          machine: machine
+          options: options
+          user: user
+        config:
+          name: name
+          setid:
+            user: user
+            group: group
+          max_channels: 0
+          default_language: default_language
+          max_open_files: 1
+          max_load: 6.027456183070403
+        status:
+          startup_time: 2000-01-23
+          last_reload_time: 2000-01-23
+      properties:
+        build:
+          $ref: '#/components/schemas/BuildInfo'
+        config:
+          $ref: '#/components/schemas/ConfigInfo'
+        status:
+          $ref: '#/components/schemas/StatusInfo'
+        system:
+          $ref: '#/components/schemas/SystemInfo'
+      title: AsteriskInfo
+      type: object
+    AsteriskPing:
+      description: Asterisk ping information
+      example:
+        asterisk_id: asterisk_id
+        ping: ping
+        timestamp: timestamp
+      properties:
+        asterisk_id:
+          description: Asterisk id info
+          title: asterisk_id
+          type: string
+        ping:
+          description: Always string value is pong
+          title: ping
+          type: string
+        timestamp:
+          description: The timestamp string of request received time
+          title: timestamp
+          type: string
+      required:
+      - asterisk_id
+      - ping
+      - timestamp
+      title: AsteriskPing
+      type: object
+    Bridge:
+      description: |-
+        The merging of media from one or more channels.
+
+        Everyone on the bridge receives the same audio.
+      example:
+        creator: creator
+        bridge_type: bridge_type
+        channels:
+        - channels
+        - channels
+        video_source_id: video_source_id
+        bridge_class: bridge_class
+        name: name
+        video_mode: video_mode
+        creationtime: 2000-01-23
+        id: id
+        technology: technology
+      properties:
+        bridge_class:
+          description: Bridging class
+          title: bridge_class
+          type: string
+        bridge_type:
+          description: Type of bridge technology
+          title: bridge_type
+          type: string
+        channels:
+          description: Ids of channels participating in this bridge
+          items:
+            type: string
+          title: channels
+          type: array
+        creationtime:
+          description: Timestamp when bridge was created
+          format: date
+          title: creationtime
+          type: string
+        creator:
+          description: Entity that created the bridge
+          title: creator
+          type: string
+        id:
+          description: Unique identifier for this bridge
+          title: id
+          type: string
+        name:
+          description: Name the creator gave the bridge
+          title: name
+          type: string
+        technology:
+          description: Name of the current bridging technology
+          title: technology
+          type: string
+        video_mode:
+          description: "The video mode the bridge is using. One of 'none', 'talker',\
+            \ or 'single'."
+          title: video_mode
+          type: string
+        video_source_id:
+          description: "The ID of the channel that is the source of video in this\
+            \ bridge, if one exists."
+          title: video_source_id
+          type: string
+      required:
+      - bridge_class
+      - bridge_type
+      - channels
+      - creationtime
+      - creator
+      - id
+      - name
+      - technology
+      title: Bridge
+      type: object
+    BridgeAttendedTransfer:
+      allOf:
+      - description: Notification that an attended transfer has occurred.
+        properties:
+          destination_application:
+            description: Application that has been transferred into
+            type: string
+          destination_bridge:
+            description: Bridge that survived the merge result
+            type: string
+          destination_link_first_leg:
+            $ref: '#/components/schemas/Channel'
+          destination_link_second_leg:
+            $ref: '#/components/schemas/Channel'
+          destination_threeway_bridge:
+            $ref: '#/components/schemas/Bridge'
+          destination_threeway_channel:
+            $ref: '#/components/schemas/Channel'
+          destination_type:
+            description: How the transfer was accomplished
+            type: string
+          is_external:
+            description: Whether the transfer was externally initiated or not
+            type: boolean
+          replace_channel:
+            $ref: '#/components/schemas/Channel'
+          result:
+            description: The result of the transfer attempt
+            type: string
+          transfer_target:
+            $ref: '#/components/schemas/Channel'
+          transferee:
+            $ref: '#/components/schemas/Channel'
+          transferer_first_leg:
+            $ref: '#/components/schemas/Channel'
+          transferer_first_leg_bridge:
+            $ref: '#/components/schemas/Bridge'
+          transferer_second_leg:
+            $ref: '#/components/schemas/Channel'
+          transferer_second_leg_bridge:
+            $ref: '#/components/schemas/Bridge'
+        required:
+        - destination_type
+        - is_external
+        - result
+        - transferer_first_leg
+        - transferer_second_leg
+        type: object
+      - $ref: '#/components/schemas/Event'
+    BridgeBlindTransfer:
+      allOf:
+      - description: Notification that a blind transfer has occurred.
+        properties:
+          bridge:
+            $ref: '#/components/schemas/Bridge'
+          channel:
+            $ref: '#/components/schemas/Channel'
+          context:
+            description: The context transferred to
+            type: string
+          exten:
+            description: The extension transferred to
+            type: string
+          is_external:
+            description: Whether the transfer was externally initiated or not
+            type: boolean
+          replace_channel:
+            $ref: '#/components/schemas/Channel'
+          result:
+            description: The result of the transfer attempt
+            type: string
+          transferee:
+            $ref: '#/components/schemas/Channel'
+        required:
+        - channel
+        - context
+        - exten
+        - is_external
+        - result
+        type: object
+      - $ref: '#/components/schemas/Event'
+    BridgeCreated:
+      allOf:
+      - description: Notification that a bridge has been created.
+        properties:
+          bridge:
+            $ref: '#/components/schemas/Bridge'
+        required:
+        - bridge
+        type: object
+      - $ref: '#/components/schemas/Event'
+    BridgeDestroyed:
+      allOf:
+      - description: Notification that a bridge has been destroyed.
+        properties:
+          bridge:
+            $ref: '#/components/schemas/Bridge'
+        required:
+        - bridge
+        type: object
+      - $ref: '#/components/schemas/Event'
+    BridgeMerged:
+      allOf:
+      - description: Notification that one bridge has merged into another.
+        properties:
+          bridge:
+            $ref: '#/components/schemas/Bridge'
+          bridge_from:
+            $ref: '#/components/schemas/Bridge'
+        required:
+        - bridge
+        - bridge_from
+        type: object
+      - $ref: '#/components/schemas/Event'
+    BridgeVideoSourceChanged:
+      allOf:
+      - description: Notification that the source of video in a bridge has changed.
+        properties:
+          bridge:
+            $ref: '#/components/schemas/Bridge'
+          old_video_source_id:
+            type: string
+        required:
+        - bridge
+        type: object
+      - $ref: '#/components/schemas/Event'
+    BuildInfo:
+      description: Info about how Asterisk was built
+      example:
+        date: date
+        os: os
+        kernel: kernel
+        machine: machine
+        options: options
+        user: user
+      properties:
+        date:
+          description: Date and time when Asterisk was built.
+          title: date
+          type: string
+        kernel:
+          description: Kernel version Asterisk was built on.
+          title: kernel
+          type: string
+        machine:
+          description: "Machine architecture (x86_64, i686, ppc, etc.)"
+          title: machine
+          type: string
+        options:
+          description: "Compile time options, or empty string if default."
+          title: options
+          type: string
+        os:
+          description: OS Asterisk was built on.
+          title: os
+          type: string
+        user:
+          description: Username that build Asterisk
+          title: user
+          type: string
+      required:
+      - date
+      - kernel
+      - machine
+      - options
+      - os
+      - user
+      title: BuildInfo
+      type: object
+    CallerID:
+      description: Caller identification
+      example:
+        number: number
+        name: name
+      properties:
+        name:
+          title: name
+          type: string
+        number:
+          title: number
+          type: string
+      required:
+      - name
+      - number
+      title: CallerID
+      type: object
+    Channel:
+      description: A specific communication connection between Asterisk and an Endpoint.
+      example:
+        connected:
+          number: number
+          name: name
+        caller:
+          number: number
+          name: name
+        name: name
+        channelvars: "{}"
+        dialplan:
+          app_name: app_name
+          context: context
+          app_data: app_data
+          priority: 0
+          exten: exten
+        language: language
+        creationtime: 2000-01-23
+        id: id
+        state: state
+        accountcode: accountcode
+      properties:
+        accountcode:
+          title: accountcode
+          type: string
+        caller:
+          $ref: '#/components/schemas/CallerID'
+        channelvars:
+          description: Channel variables
+          properties: {}
+          title: channelvars
+          type: object
+        connected:
+          $ref: '#/components/schemas/CallerID'
+        creationtime:
+          description: Timestamp when channel was created
+          format: date
+          title: creationtime
+          type: string
+        dialplan:
+          $ref: '#/components/schemas/DialplanCEP'
+        id:
+          description: |-
+            Unique identifier of the channel.
+
+            This is the same as the Uniqueid field in AMI.
+          title: id
+          type: string
+        language:
+          description: The default spoken language
+          title: language
+          type: string
+        name:
+          description: Name of the channel (i.e. SIP/foo-0000a7e3)
+          title: name
+          type: string
+        state:
+          title: state
+          type: string
+      required:
+      - accountcode
+      - caller
+      - connected
+      - creationtime
+      - dialplan
+      - id
+      - language
+      - name
+      - state
+      title: Channel
+      type: object
+    ChannelCallerId:
+      allOf:
+      - description: Channel changed Caller ID.
+        properties:
+          caller_presentation:
+            description: The integer representation of the Caller Presentation value.
+            format: int32
+            type: integer
+          caller_presentation_txt:
+            description: The text representation of the Caller Presentation value.
+            type: string
+          channel:
+            $ref: '#/components/schemas/Channel'
+        required:
+        - caller_presentation
+        - caller_presentation_txt
+        - channel
+        type: object
+      - $ref: '#/components/schemas/Event'
+    ChannelConnectedLine:
+      allOf:
+      - description: Channel changed Connected Line.
+        properties:
+          channel:
+            $ref: '#/components/schemas/Channel'
+        required:
+        - channel
+        type: object
+      - $ref: '#/components/schemas/Event'
+    ChannelCreated:
+      allOf:
+      - description: Notification that a channel has been created.
+        properties:
+          channel:
+            $ref: '#/components/schemas/Channel'
+        required:
+        - channel
+        type: object
+      - $ref: '#/components/schemas/Event'
+    ChannelDestroyed:
+      allOf:
+      - description: Notification that a channel has been destroyed.
+        properties:
+          cause:
+            description: Integer representation of the cause of the hangup
+            format: int32
+            type: integer
+          cause_txt:
+            description: Text representation of the cause of the hangup
+            type: string
+          channel:
+            $ref: '#/components/schemas/Channel'
+        required:
+        - cause
+        - cause_txt
+        - channel
+        type: object
+      - $ref: '#/components/schemas/Event'
+    ChannelDialplan:
+      allOf:
+      - description: Channel changed location in the dialplan.
+        properties:
+          channel:
+            $ref: '#/components/schemas/Channel'
+          dialplan_app:
+            description: The application about to be executed.
+            type: string
+          dialplan_app_data:
+            description: The data to be passed to the application.
+            type: string
+        required:
+        - channel
+        - dialplan_app
+        - dialplan_app_data
+        type: object
+      - $ref: '#/components/schemas/Event'
+    ChannelDtmfReceived:
+      allOf:
+      - description: |-
+          DTMF received on a channel.
+
+          This event is sent when the DTMF ends. There is no notification about the start of DTMF
+        properties:
+          channel:
+            $ref: '#/components/schemas/Channel'
+          digit:
+            description: "DTMF digit received (0-9, A-E, # or *)"
+            type: string
+          duration_ms:
+            description: Number of milliseconds DTMF was received
+            format: int32
+            type: integer
+        required:
+        - channel
+        - digit
+        - duration_ms
+        type: object
+      - $ref: '#/components/schemas/Event'
+    ChannelEnteredBridge:
+      allOf:
+      - description: Notification that a channel has entered a bridge.
+        properties:
+          bridge:
+            $ref: '#/components/schemas/Bridge'
+          channel:
+            $ref: '#/components/schemas/Channel'
+        required:
+        - bridge
+        type: object
+      - $ref: '#/components/schemas/Event'
+    ChannelHangupRequest:
+      allOf:
+      - description: A hangup was requested on the channel.
+        properties:
+          cause:
+            description: Integer representation of the cause of the hangup.
+            format: int32
+            type: integer
+          channel:
+            $ref: '#/components/schemas/Channel'
+          soft:
+            description: Whether the hangup request was a soft hangup request.
+            type: boolean
+        required:
+        - channel
+        type: object
+      - $ref: '#/components/schemas/Event'
+    ChannelHold:
+      allOf:
+      - description: A channel initiated a media hold.
+        properties:
+          channel:
+            $ref: '#/components/schemas/Channel'
+          musicclass:
+            description: The music on hold class that the initiator requested.
+            type: string
+        required:
+        - channel
+        type: object
+      - $ref: '#/components/schemas/Event'
+    ChannelLeftBridge:
+      allOf:
+      - description: Notification that a channel has left a bridge.
+        properties:
+          bridge:
+            $ref: '#/components/schemas/Bridge'
+          channel:
+            $ref: '#/components/schemas/Channel'
+        required:
+        - bridge
+        - channel
+        type: object
+      - $ref: '#/components/schemas/Event'
+    ChannelStateChange:
+      allOf:
+      - description: Notification of a channel's state change.
+        properties:
+          channel:
+            $ref: '#/components/schemas/Channel'
+        required:
+        - channel
+        type: object
+      - $ref: '#/components/schemas/Event'
+    ChannelTalkingFinished:
+      allOf:
+      - description: Talking is no longer detected on the channel.
+        properties:
+          channel:
+            $ref: '#/components/schemas/Channel'
+          duration:
+            description: "The length of time, in milliseconds, that talking was detected\
+              \ on the channel"
+            format: int32
+            type: integer
+        required:
+        - channel
+        - duration
+        type: object
+      - $ref: '#/components/schemas/Event'
+    ChannelTalkingStarted:
+      allOf:
+      - description: Talking was detected on the channel.
+        properties:
+          channel:
+            $ref: '#/components/schemas/Channel'
+        required:
+        - channel
+        type: object
+      - $ref: '#/components/schemas/Event'
+    ChannelUnhold:
+      allOf:
+      - description: A channel initiated a media unhold.
+        properties:
+          channel:
+            $ref: '#/components/schemas/Channel'
+        required:
+        - channel
+        type: object
+      - $ref: '#/components/schemas/Event'
+    ChannelUserevent:
+      allOf:
+      - description: User-generated event with additional user-defined fields in the
+          object.
+        properties:
+          bridge:
+            $ref: '#/components/schemas/Bridge'
+          channel:
+            $ref: '#/components/schemas/Channel'
+          endpoint:
+            $ref: '#/components/schemas/Endpoint'
+          eventname:
+            description: The name of the user event.
+            type: string
+          userevent:
+            $ref: '#/components/schemas/ChannelUserevent_allOf_userevent'
+        required:
+        - eventname
+        - userevent
+        type: object
+      - $ref: '#/components/schemas/Event'
+    ChannelVarset:
+      allOf:
+      - description: Channel variable changed.
+        properties:
+          channel:
+            $ref: '#/components/schemas/Channel'
+          value:
+            description: The new value of the variable.
+            type: string
+          variable:
+            description: The variable that changed.
+            type: string
+        required:
+        - value
+        - variable
+        type: object
+      - $ref: '#/components/schemas/Event'
+    ConfigInfo:
+      description: Info about Asterisk configuration
+      example:
+        name: name
+        setid:
+          user: user
+          group: group
+        max_channels: 0
+        default_language: default_language
+        max_open_files: 1
+        max_load: 6.027456183070403
+      properties:
+        default_language:
+          description: Default language for media playback.
+          title: default_language
+          type: string
+        max_channels:
+          description: Maximum number of simultaneous channels.
+          format: int32
+          title: max_channels
+          type: integer
+        max_load:
+          description: Maximum load avg on system.
+          format: double
+          title: max_load
+          type: number
+        max_open_files:
+          description: "Maximum number of open file handles (files, sockets)."
+          format: int32
+          title: max_open_files
+          type: integer
+        name:
+          description: Asterisk system name.
+          title: name
+          type: string
+        setid:
+          $ref: '#/components/schemas/SetId'
+      required:
+      - default_language
+      - name
+      - setid
+      title: ConfigInfo
+      type: object
+    ConfigTuple:
+      description: A key/value pair that makes up part of a configuration object.
+      example:
+        attribute: attribute
+        value: value
+      properties:
+        attribute:
+          description: A configuration object attribute.
+          title: attribute
+          type: string
+        value:
+          description: The value for the attribute.
+          title: value
+          type: string
+      required:
+      - attribute
+      - value
+      title: ConfigTuple
+      type: object
+    ContactInfo:
+      description: Detailed information about a contact on an endpoint.
+      properties:
+        aor:
+          description: The Address of Record this contact belongs to.
+          title: aor
+          type: string
+        contact_status:
+          description: The current status of the contact.
+          title: contact_status
+          type: string
+        roundtrip_usec:
+          description: "Current round trip time, in microseconds, for the contact."
+          title: roundtrip_usec
+          type: string
+        uri:
+          description: The location of the contact.
+          title: uri
+          type: string
+      required:
+      - aor
+      - contact_status
+      - uri
+      title: ContactInfo
+      type: object
+    ContactStatusChange:
+      allOf:
+      - description: The state of a contact on an endpoint has changed.
+        properties:
+          contact_info:
+            $ref: '#/components/schemas/ContactInfo'
+          endpoint:
+            $ref: '#/components/schemas/Endpoint'
+        required:
+        - contact_info
+        - endpoint
+        type: object
+      - $ref: '#/components/schemas/Event'
+    DeviceState:
+      description: Represents the state of a device.
+      example:
+        name: name
+        state: state
+      properties:
+        name:
+          description: Name of the device.
+          title: name
+          type: string
+        state:
+          description: Device's state
+          title: state
+          type: string
+      required:
+      - name
+      - state
+      title: DeviceState
+      type: object
+    DeviceStateChanged:
+      allOf:
+      - description: Notification that a device state has changed.
+        properties:
+          device_state:
+            $ref: '#/components/schemas/DeviceState'
+        required:
+        - device_state
+        type: object
+      - $ref: '#/components/schemas/Event'
+    Dial:
+      allOf:
+      - description: Dialing state has changed.
+        properties:
+          caller:
+            $ref: '#/components/schemas/Channel'
+          dialstatus:
+            description: Current status of the dialing attempt to the peer.
+            type: string
+          dialstring:
+            description: The dial string for calling the peer channel.
+            type: string
+          forward:
+            description: Forwarding target requested by the original dialed channel.
+            type: string
+          forwarded:
+            $ref: '#/components/schemas/Channel'
+          peer:
+            $ref: '#/components/schemas/Channel'
+        required:
+        - dialstatus
+        - peer
+        type: object
+      - $ref: '#/components/schemas/Event'
+    Dialed:
+      description: Dialed channel information.
+      type: object
+    DialplanCEP:
+      description: Dialplan location (context/extension/priority)
+      example:
+        app_name: app_name
+        context: context
+        app_data: app_data
+        priority: 0
+        exten: exten
+      properties:
+        app_data:
+          description: Parameter of current dialplan application
+          title: app_data
+          type: string
+        app_name:
+          description: Name of current dialplan application
+          title: app_name
+          type: string
+        context:
+          description: Context in the dialplan
+          title: context
+          type: string
+        exten:
+          description: Extension in the dialplan
+          title: exten
+          type: string
+        priority:
+          description: Priority in the dialplan
+          format: int64
+          title: priority
+          type: integer
+      required:
+      - app_data
+      - app_name
+      - context
+      - exten
+      - priority
+      title: DialplanCEP
+      type: object
+    Endpoint:
+      description: |-
+        An external device that may offer/accept calls to/from Asterisk.
+
+        Unlike most resources, which have a single unique identifier, an endpoint is uniquely identified by the technology/resource pair.
+      example:
+        channel_ids:
+        - channel_ids
+        - channel_ids
+        resource: resource
+        state: state
+        technology: technology
+      properties:
+        channel_ids:
+          description: Id's of channels associated with this endpoint
+          items:
+            type: string
+          title: channel_ids
+          type: array
+        resource:
+          description: "Identifier of the endpoint, specific to the given technology."
+          title: resource
+          type: string
+        state:
+          description: Endpoint's state
+          title: state
+          type: string
+        technology:
+          description: Technology of the endpoint
+          title: technology
+          type: string
+      required:
+      - channel_ids
+      - resource
+      - technology
+      title: Endpoint
+      type: object
+    EndpointStateChange:
+      allOf:
+      - description: Endpoint state changed.
+        properties:
+          endpoint:
+            $ref: '#/components/schemas/Endpoint'
+        required:
+        - endpoint
+        type: object
+      - $ref: '#/components/schemas/Event'
+    Event:
+      allOf:
+      - description: Base type for asynchronous events from Asterisk.
+        properties:
+          application:
+            description: Name of the application receiving the event.
+            type: string
+          timestamp:
+            description: Time at which this event was created.
+            format: date
+            type: string
+        required:
+        - application
+        - timestamp
+        type: object
+      - $ref: '#/components/schemas/Message'
+      title: Event
+    FormatLangPair:
+      description: Identifies the format and language of a sound file
+      example:
+        format: format
+        language: language
+      properties:
+        format:
+          title: format
+          type: string
+        language:
+          title: language
+          type: string
+      required:
+      - format
+      - language
+      title: FormatLangPair
+      type: object
+    LiveRecording:
+      description: A recording that is in progress
+      example:
+        duration: 0
+        silence_duration: 6
+        talking_duration: 1
+        format: format
+        name: name
+        target_uri: target_uri
+        cause: cause
+        state: state
+      properties:
+        cause:
+          description: Cause for recording failure if failed
+          title: cause
+          type: string
+        duration:
+          description: Duration in seconds of the recording
+          format: int32
+          title: duration
+          type: integer
+        format:
+          description: "Recording format (wav, gsm, etc.)"
+          title: format
+          type: string
+        name:
+          description: Base name for the recording
+          title: name
+          type: string
+        silence_duration:
+          description: "Duration of silence, in seconds, detected in the recording.\
+            \ This is only available if the recording was initiated with a non-zero\
+            \ maxSilenceSeconds."
+          format: int32
+          title: silence_duration
+          type: integer
+        state:
+          title: state
+          type: string
+        talking_duration:
+          description: "Duration of talking, in seconds, detected in the recording.\
+            \ This is only available if the recording was initiated with a non-zero\
+            \ maxSilenceSeconds."
+          format: int32
+          title: talking_duration
+          type: integer
+        target_uri:
+          description: URI for the channel or bridge being recorded
+          title: target_uri
+          type: string
+      required:
+      - format
+      - name
+      - state
+      - target_uri
+      title: LiveRecording
+      type: object
+    LogChannel:
+      description: Details of an Asterisk log channel
+      example:
+        configuration: configuration
+        channel: channel
+        type: type
+        status: status
+      properties:
+        channel:
+          description: The log channel path
+          title: channel
+          type: string
+        configuration:
+          description: The various log levels
+          title: configuration
+          type: string
+        status:
+          description: Whether or not a log type is enabled
+          title: status
+          type: string
+        type:
+          description: Types of logs for the log channel
+          title: type
+          type: string
+      required:
+      - channel
+      - configuration
+      - status
+      - type
+      title: LogChannel
+      type: object
+    Mailbox:
+      description: Represents the state of a mailbox.
+      example:
+        new_messages: 0
+        name: name
+        old_messages: 6
+      properties:
+        name:
+          description: Name of the mailbox.
+          title: name
+          type: string
+        new_messages:
+          description: Count of new messages in the mailbox.
+          format: int32
+          title: new_messages
+          type: integer
+        old_messages:
+          description: Count of old messages in the mailbox.
+          format: int32
+          title: old_messages
+          type: integer
+      required:
+      - name
+      - new_messages
+      - old_messages
+      title: Mailbox
+      type: object
+    Message:
+      description: Base type for errors and events
+      discriminator:
+        propertyName: type
+      example:
+        asterisk_id: asterisk_id
+        type: type
+      properties:
+        asterisk_id:
+          description: The unique ID for the Asterisk instance that raised this event.
+          title: asterisk_id
+          type: string
+        type:
+          description: Indicates the type of this message.
+          title: type
+          type: string
+      required:
+      - type
+      title: Message
+      type: object
+    MissingParams:
+      allOf:
+      - description: Error event sent when required params are missing.
+        properties:
+          params:
+            description: A list of the missing parameters
+            items:
+              type: string
+            type: array
+        required:
+        - params
+        type: object
+      - $ref: '#/components/schemas/Message'
+    Module:
+      description: Details of an Asterisk module
+      example:
+        use_count: 0
+        name: name
+        description: description
+        support_level: support_level
+        status: status
+      properties:
+        description:
+          description: The description of this module
+          title: description
+          type: string
+        name:
+          description: The name of this module
+          title: name
+          type: string
+        status:
+          description: The running status of this module
+          title: status
+          type: string
+        support_level:
+          description: The support state of this module
+          title: support_level
+          type: string
+        use_count:
+          description: The number of times this module is being used
+          format: int32
+          title: use_count
+          type: integer
+      required:
+      - description
+      - name
+      - status
+      - support_level
+      - use_count
+      title: Module
+      type: object
+    Peer:
+      description: Detailed information about a remote peer that communicates with
+        Asterisk.
+      properties:
+        address:
+          description: The IP address of the peer.
+          title: address
+          type: string
+        cause:
+          description: An optional reason associated with the change in peer_status.
+          title: cause
+          type: string
+        peer_status:
+          description: The current state of the peer. Note that the values of the
+            status are dependent on the underlying peer technology.
+          title: peer_status
+          type: string
+        port:
+          description: The port of the peer.
+          title: port
+          type: string
+        time:
+          description: The last known time the peer was contacted.
+          title: time
+          type: string
+      required:
+      - peer_status
+      title: Peer
+      type: object
+    PeerStatusChange:
+      allOf:
+      - description: The state of a peer associated with an endpoint has changed.
+        properties:
+          endpoint:
+            $ref: '#/components/schemas/Endpoint'
+          peer:
+            $ref: '#/components/schemas/Peer'
+        required:
+        - endpoint
+        - peer
+        type: object
+      - $ref: '#/components/schemas/Event'
+    Playback:
+      description: Object representing the playback of media to a channel
+      example:
+        media_uri: media_uri
+        target_uri: target_uri
+        language: language
+        next_media_uri: next_media_uri
+        id: id
+        state: state
+      properties:
+        id:
+          description: ID for this playback operation
+          title: id
+          type: string
+        language:
+          description: "For media types that support multiple languages, the language\
+            \ requested for playback."
+          title: language
+          type: string
+        media_uri:
+          description: The URI for the media currently being played back.
+          title: media_uri
+          type: string
+        next_media_uri:
+          description: "If a list of URIs is being played, the next media URI to be\
+            \ played back."
+          title: next_media_uri
+          type: string
+        state:
+          description: Current state of the playback operation.
+          title: state
+          type: string
+        target_uri:
+          description: URI for the channel or bridge to play the media on
+          title: target_uri
+          type: string
+      required:
+      - id
+      - media_uri
+      - state
+      - target_uri
+      title: Playback
+      type: object
+    PlaybackContinuing:
+      allOf:
+      - description: Event showing the continuation of a media playback operation
+          from one media URI to the next in the list.
+        properties:
+          playback:
+            $ref: '#/components/schemas/Playback'
+        required:
+        - playback
+        type: object
+      - $ref: '#/components/schemas/Event'
+    PlaybackFinished:
+      allOf:
+      - description: Event showing the completion of a media playback operation.
+        properties:
+          playback:
+            $ref: '#/components/schemas/Playback'
+        required:
+        - playback
+        type: object
+      - $ref: '#/components/schemas/Event'
+    PlaybackStarted:
+      allOf:
+      - description: Event showing the start of a media playback operation.
+        properties:
+          playback:
+            $ref: '#/components/schemas/Playback'
+        required:
+        - playback
+        type: object
+      - $ref: '#/components/schemas/Event'
+    RTPstat:
+      description: A statistics of a RTP.
+      example:
+        maxrtt: 2.027123023002322
+        remote_maxrxploss: 1.0246457001441578
+        local_normdevrxploss: 2.3021358869347655
+        remote_minrxploss: 6.84685269835264
+        local_normdevjitter: 5.637376656633329
+        normdevrtt: 7.386281948385884
+        remote_normdevjitter: 7.457744773683766
+        local_stdevrxploss: 3.616076749251911
+        remote_stdevrxploss: 9.965781217890562
+        local_maxjitter: 0.8008281904610115
+        remote_minjitter: 1.4894159098541704
+        local_ssrc: 7
+        local_minjitter: 1.4658129805029452
+        minrtt: 4.145608029883936
+        txoctetcount: 2
+        remote_normdevrxploss: 1.1730742509559433
+        remote_ssrc: 4
+        rxjitter: 8.762042012749001
+        txjitter: 1.284659006116532
+        rxploss: 6
+        local_minrxploss: 5.962133916683182
+        remote_maxjitter: 1.2315135367772556
+        remote_stdevjitter: 5.025004791520295
+        channel_uniqueid: channel_uniqueid
+        local_maxrxploss: 6.027456183070403
+        rtt: 9.369310271410669
+        rxoctetcount: 9
+        txcount: 6
+        local_stdevjitter: 9.301444243932576
+        rxcount: 6
+        txploss: 6
+        stdevrtt: 3.5571952270680973
+      properties:
+        channel_uniqueid:
+          description: The Asterisk channel's unique ID that owns this instance.
+          title: channel_uniqueid
+          type: string
+        local_maxjitter:
+          description: Maximum jitter on local side.
+          format: double
+          title: local_maxjitter
+          type: number
+        local_maxrxploss:
+          description: Maximum number of packets lost on local side.
+          format: double
+          title: local_maxrxploss
+          type: number
+        local_minjitter:
+          description: Minimum jitter on local side.
+          format: double
+          title: local_minjitter
+          type: number
+        local_minrxploss:
+          description: Minimum number of packets lost on local side.
+          format: double
+          title: local_minrxploss
+          type: number
+        local_normdevjitter:
+          description: Average jitter on local side.
+          format: double
+          title: local_normdevjitter
+          type: number
+        local_normdevrxploss:
+          description: Average number of packets lost on local side.
+          format: double
+          title: local_normdevrxploss
+          type: number
+        local_ssrc:
+          description: Our SSRC.
+          format: int32
+          title: local_ssrc
+          type: integer
+        local_stdevjitter:
+          description: Standard deviation jitter on local side.
+          format: double
+          title: local_stdevjitter
+          type: number
+        local_stdevrxploss:
+          description: Standard deviation packets lost on local side.
+          format: double
+          title: local_stdevrxploss
+          type: number
+        maxrtt:
+          description: Maximum round trip time.
+          format: double
+          title: maxrtt
+          type: number
+        minrtt:
+          description: Minimum round trip time.
+          format: double
+          title: minrtt
+          type: number
+        normdevrtt:
+          description: Average round trip time.
+          format: double
+          title: normdevrtt
+          type: number
+        remote_maxjitter:
+          description: Maximum jitter on remote side.
+          format: double
+          title: remote_maxjitter
+          type: number
+        remote_maxrxploss:
+          description: Maximum number of packets lost on remote side.
+          format: double
+          title: remote_maxrxploss
+          type: number
+        remote_minjitter:
+          description: Minimum jitter on remote side.
+          format: double
+          title: remote_minjitter
+          type: number
+        remote_minrxploss:
+          description: Minimum number of packets lost on remote side.
+          format: double
+          title: remote_minrxploss
+          type: number
+        remote_normdevjitter:
+          description: Average jitter on remote side.
+          format: double
+          title: remote_normdevjitter
+          type: number
+        remote_normdevrxploss:
+          description: Average number of packets lost on remote side.
+          format: double
+          title: remote_normdevrxploss
+          type: number
+        remote_ssrc:
+          description: Their SSRC.
+          format: int32
+          title: remote_ssrc
+          type: integer
+        remote_stdevjitter:
+          description: Standard deviation jitter on remote side.
+          format: double
+          title: remote_stdevjitter
+          type: number
+        remote_stdevrxploss:
+          description: Standard deviation packets lost on remote side.
+          format: double
+          title: remote_stdevrxploss
+          type: number
+        rtt:
+          description: Total round trip time.
+          format: double
+          title: rtt
+          type: number
+        rxcount:
+          description: Number of packets received.
+          format: int32
+          title: rxcount
+          type: integer
+        rxjitter:
+          description: Jitter on received packets.
+          format: double
+          title: rxjitter
+          type: number
+        rxoctetcount:
+          description: Number of octets received.
+          format: int32
+          title: rxoctetcount
+          type: integer
+        rxploss:
+          description: Number of received packets lost.
+          format: int32
+          title: rxploss
+          type: integer
+        stdevrtt:
+          description: Standard deviation round trip time.
+          format: double
+          title: stdevrtt
+          type: number
+        txcount:
+          description: Number of packets transmitted.
+          format: int32
+          title: txcount
+          type: integer
+        txjitter:
+          description: Jitter on transmitted packets.
+          format: double
+          title: txjitter
+          type: number
+        txoctetcount:
+          description: Number of octets transmitted.
+          format: int32
+          title: txoctetcount
+          type: integer
+        txploss:
+          description: Number of transmitted packets lost.
+          format: int32
+          title: txploss
+          type: integer
+      required:
+      - channel_uniqueid
+      - local_ssrc
+      - remote_ssrc
+      - rxcount
+      - rxoctetcount
+      - rxploss
+      - txcount
+      - txoctetcount
+      - txploss
+      title: RTPstat
+      type: object
+    RecordingFailed:
+      allOf:
+      - description: Event showing failure of a recording operation.
+        properties:
+          recording:
+            $ref: '#/components/schemas/LiveRecording'
+        required:
+        - recording
+        type: object
+      - $ref: '#/components/schemas/Event'
+    RecordingFinished:
+      allOf:
+      - description: Event showing the completion of a recording operation.
+        properties:
+          recording:
+            $ref: '#/components/schemas/LiveRecording'
+        required:
+        - recording
+        type: object
+      - $ref: '#/components/schemas/Event'
+    RecordingStarted:
+      allOf:
+      - description: Event showing the start of a recording operation.
+        properties:
+          recording:
+            $ref: '#/components/schemas/LiveRecording'
+        required:
+        - recording
+        type: object
+      - $ref: '#/components/schemas/Event'
+    SetId:
+      description: Effective user/group id
+      example:
+        user: user
+        group: group
+      properties:
+        group:
+          description: Effective group id.
+          title: group
+          type: string
+        user:
+          description: Effective user id.
+          title: user
+          type: string
+      required:
+      - group
+      - user
+      title: SetId
+      type: object
+    Sound:
+      description: A media file that may be played back.
+      example:
+        formats:
+        - format: format
+          language: language
+        - format: format
+          language: language
+        id: id
+        text: text
+      properties:
+        formats:
+          description: The formats and languages in which this sound is available.
+          items:
+            $ref: '#/components/schemas/FormatLangPair'
+          title: formats
+          type: array
+        id:
+          description: Sound's identifier.
+          title: id
+          type: string
+        text:
+          description: "Text description of the sound, usually the words spoken."
+          title: text
+          type: string
+      required:
+      - formats
+      - id
+      title: Sound
+      type: object
+    StasisEnd:
+      allOf:
+      - description: Notification that a channel has left a Stasis application.
+        properties:
+          channel:
+            $ref: '#/components/schemas/Channel'
+        required:
+        - channel
+        type: object
+      - $ref: '#/components/schemas/Event'
+    StasisStart:
+      allOf:
+      - description: Notification that a channel has entered a Stasis application.
+        properties:
+          args:
+            description: Arguments to the application
+            items:
+              type: string
+            type: array
+          channel:
+            $ref: '#/components/schemas/Channel'
+          replace_channel:
+            $ref: '#/components/schemas/Channel'
+        required:
+        - args
+        - channel
+        type: object
+      - $ref: '#/components/schemas/Event'
+    StatusInfo:
+      description: Info about Asterisk status
+      example:
+        startup_time: 2000-01-23
+        last_reload_time: 2000-01-23
+      properties:
+        last_reload_time:
+          description: Time when Asterisk was last reloaded.
+          format: date
+          title: last_reload_time
+          type: string
+        startup_time:
+          description: Time when Asterisk was started.
+          format: date
+          title: startup_time
+          type: string
+      required:
+      - last_reload_time
+      - startup_time
+      title: StatusInfo
+      type: object
+    StoredRecording:
+      description: A past recording that may be played back.
+      example:
+        format: format
+        name: name
+      properties:
+        format:
+          title: format
+          type: string
+        name:
+          title: name
+          type: string
+      required:
+      - format
+      - name
+      title: StoredRecording
+      type: object
+    SystemInfo:
+      description: Info about Asterisk
+      example:
+        entity_id: entity_id
+        version: version
+      properties:
+        entity_id:
+          title: entity_id
+          type: string
+        version:
+          description: Asterisk version.
+          title: version
+          type: string
+      required:
+      - entity_id
+      - version
+      title: SystemInfo
+      type: object
+    TextMessage:
+      description: A text message.
+      properties:
+        body:
+          description: The text of the message.
+          title: body
+          type: string
+        from:
+          description: "A technology specific URI specifying the source of the message.\
+            \ For sip and pjsip technologies, any SIP URI can be specified. For xmpp,\
+            \ the URI must correspond to the client connection being used to send\
+            \ the message."
+          title: from
+          type: string
+        to:
+          description: "A technology specific URI specifying the destination of the\
+            \ message. Valid technologies include sip, pjsip, and xmp. The destination\
+            \ of a message should be an endpoint."
+          title: to
+          type: string
+        variables:
+          description: Technology specific key/value pairs (JSON object) associated
+            with the message.
+          properties: {}
+          title: variables
+          type: object
+      required:
+      - body
+      - from
+      - to
+      title: TextMessage
+      type: object
+    TextMessageReceived:
+      allOf:
+      - description: A text message was received from an endpoint.
+        properties:
+          endpoint:
+            $ref: '#/components/schemas/Endpoint'
+          message:
+            $ref: '#/components/schemas/TextMessage'
+        required:
+        - message
+        type: object
+      - $ref: '#/components/schemas/Event'
+    Variable:
+      description: The value of a channel variable
+      example:
+        value: value
+      properties:
+        value:
+          description: The value of the variable requested
+          title: value
+          type: string
+      required:
+      - value
+      title: Variable
+      type: object
+    ChannelUserevent_allOf_userevent:
+      description: Custom Userevent data
+      properties: {}
+      type: object
